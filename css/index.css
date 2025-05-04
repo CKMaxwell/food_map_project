@@ -1,0 +1,286 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#map {
+    width: 100%;
+    height: 100vh;
+}
+
+#search-box {
+    position: absolute;
+    top: 15px;
+    left: 50px;
+    width: 500px;
+    /* height: 200px; */
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 500;
+}
+.row {
+    margin: 10px 15px;
+}
+
+.row-flex {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.custom-select {
+    background-color: #ffffff;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    border: 2px solid #2E2E2E;
+    border-radius: 10px;
+}
+  
+.custom-select .icon {
+    width: 40px;
+    height: 40px;
+    /* 使用 object-fit: cover; 自動裁切，即可不用處理radius*/
+    object-fit: cover;
+    background: #2E2E2E;
+    padding: 5px;
+    /* border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px; */
+}
+
+.nearby-label {
+    white-space: nowrap;
+    font-size: 24px;
+    color: #2E2E2E;
+  }
+
+.custom-select select {
+    width: 100%;
+    border: none;
+    object-fit: cover;
+    background: transparent;
+    font-size: 20px;
+    padding: 8px 0px;
+    /* appearance: none; */
+    /* -webkit-appearance: none;
+    -moz-appearance: none; */
+    cursor: pointer;
+    
+    /* width: 100%; */
+    /* padding: 6px; */
+    /* font-size: 16px;
+    padding: 8px 12px; */
+    /* font-size: 24px; */
+    /* border: 1px solid #2E2E2E; */
+
+    /* border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    cursor: pointer; */
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    border: 2px solid #e5e5e5;
+    border-radius: 10px;
+    height: 40px;
+    font-size: 14px;
+    padding: 0px 5px;
+}
+
+.tag {
+    background-color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    /* white-space: nowrap; */
+    transition: all 0.2s;
+}
+
+.tag.selected {
+    background-color: #333;
+    color: white;
+    border-color: #333;
+  }
+
+#user-box-default {
+    /* display: none; */
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    /* width: 400px; */
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.8);;
+    z-index: 500;
+    padding: 10px;
+}
+
+#user-box-login {
+    display: none;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 1);;
+    z-index: 500;
+    padding: 10px;
+}
+
+#home-image {
+    height: 40px;
+    /* width; 40px*/
+}
+
+#home-txt, #login-txt {
+    color: #65000B;
+    font-size: 20px;
+    white-space: nowrap;  /* 不自動換行 */
+}
+
+button {
+    padding: 10px;
+    color: #ffffff;
+    background-color: #db2222;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#login-btn {
+    width: 70px;
+}
+
+#google-login-btn {
+    font-size: 14px;
+    width: 100%;
+    color: #000000;
+    background-color: #ffffff;
+    border: 2px solid #e5e5e5;
+}
+
+#deep-login-btn{
+    font-size: 14px;
+    width: 100%;
+}
+
+#user-btn{
+    padding: 10px 10px;
+    font-size: 14px;
+    width: 100%;
+    color: #000000;
+    background-color: #ffffff;
+    border: 2px solid #e5e5e5;;
+    
+
+}
+
+#login-btn:hover {
+    background: #65000B;            /* 滑鼠移上去時改變顏色 */
+    /* text-decoration: underline;       加上底線 */
+}
+
+.user-menu {
+    margin-top: 10px;
+    display: none; /* 預設隱藏 */
+    flex-direction: column;
+    /* gap: 8px; */
+}
+
+.menu-item {
+    background-color: #ffffff;
+    padding: 10px 0px;
+    border-radius: 0px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: left;
+    /* border: 1px solid #ddd; */
+}
+
+.menu-item:hover {
+    background-color: #e5e5e5;
+}
+
+.menu-item a {
+    text-decoration: none;
+}
+
+.menu-item a:visited {
+    color: #000000;
+}
+
+
+/* 遮罩（預設隱藏） */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;  /* 水平置中 */
+    align-items: center;      /* 垂直置中 */
+    z-index: 1000;
+}
+  
+ /* 顯示遮罩 */
+.overlay.show {
+    display: flex;
+}
+  
+/* 登入盒 */
+.login-box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    width: 300px;
+    text-align: center;
+}
+.login-box input {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 8px;
+}
+
+.divider {
+    display: flex;
+    align-items: center;   /* Flex 垂直對齊 */
+    text-align: center;    /* 文字水平對齊 */
+    gap: 10px;
+    color: #666;
+}
+  
+.divider hr {
+    flex: 1;
+    border: none;
+    border-top: 1px solid #a0a0a0;
+}
+
+.left-txt {
+    text-align: left;
+}
+
+#signUp-a{
+    padding: 10px;
+    display: inline-block; /* 讓 padding 生效 */
+    color: #000000;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.return {
+    font-size: 15px;
+    text-align: right;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    cursor: pointer;
+}
+
