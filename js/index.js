@@ -2,7 +2,7 @@
 const map = L.map('map').setView([25.0478, 121.5170], 17);
 
 // const清單
-const baseUrl = new URL('https://north11.onrender.com/api/users');
+const baseUrl = new URL('https://north11.onrender.com/api/users/');
 // const baseUrl = new URL('http://localhost:8000/api/users/');
 let token = "";
 
