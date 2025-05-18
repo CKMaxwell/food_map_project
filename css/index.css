@@ -152,7 +152,7 @@ button {
     cursor: pointer;
 }
 
-#login-btn {
+#login-btn  {
     width: 70px;
 }
 
@@ -164,7 +164,7 @@ button {
     border: 2px solid #e5e5e5;
 }
 
-#deep-login-btn{
+#deep-login-btn, #signup-btn{
     font-size: 14px;
     width: 100%;
 }
@@ -267,12 +267,16 @@ button {
     text-align: left;
 }
 
-#signUp-a{
+#signUp-p{
     padding: 10px;
     display: inline-block; /* 讓 padding 生效 */
     color: #000000;
     font-size: 14px;
     text-decoration: none;
+}
+#signUp-p:hover{
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .return {
@@ -284,3 +288,46 @@ button {
     cursor: pointer;
 }
 
+
+/* 註冊盒 */
+.signup-box {
+    display: none;
+    background: #ffffff;
+    margin: 0px;
+    padding: 0px;
+    border-radius: 20px;
+    border: 0px solid #ffffff;
+    height: 570px;
+    width: 50%;
+    text-align: center;
+    overflow: hidden;    /* 若內有圖片等內容，避免超出邊界 */
+}
+
+#signup-fig {
+    width: 60%;
+    height: 100%;
+    overflow: hidden;    /* 多餘部分裁切 */
+}
+
+#signup-fig img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+}
+
+#signup-input {
+    display: block;
+    width: 40%;
+    margin: 10px 0;
+    padding: 8px;
+}
+
+#signup-input > * {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.error-text {
+    color: #db2222;
+    font-size: 12px;
+}

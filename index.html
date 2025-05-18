@@ -45,7 +45,7 @@
         <div class="row-flex">
             <img src="image/home.png" id="home-image">
             <h1 id="home-txt">私房美食地圖</h1>
-            <button id="user-btn">王小明</button>
+            <button id="user-btn"></button>
         </div>
         <div class="user-menu" id="user-menu">
             <div class="menu-item">
@@ -59,7 +59,7 @@
     </div>
     <!-- 登入畫面 -->
     <div id="overlay" class="overlay">
-        <div class="login-box">
+        <div id="login-box" class="login-box">
             <p onclick="hideLogin()" class="return" id="login-return">&times</p>
             <div class="row-flex">
                 <img src="image/home.png" id="home-image">
@@ -72,11 +72,39 @@
                 <hr>
             </div>
             <p class="left-txt">帳號</p>
-            <input id="test-username" type="text" placeholder="請輸入帳號">
+            <input id="login-username" type="text" placeholder="請輸入電子信箱">
             <p class="left-txt">密碼</p>
-            <input type="password" placeholder="請輸入密碼">
+            <input id="login-password" type="password" placeholder="請輸入密碼">
             <button onclick="login()" id="deep-login-btn">登入</button>
-            <a id="signUp-a" href="./signUp.html">還沒有帳號? 立即註冊</a>
+            <p id="error-text-login" class="error-text"></p>
+            <p id="signUp-p" onclick="toSignIn()">還沒有帳號? 立即註冊</a>
+        </div>
+        <!-- 註冊頁面 -->
+        <div id="signup-box" class="signup-box">
+            <div id="signup-fig">
+                <img src="image/signUp.png">
+            </div>
+            <div id="signup-input">
+                <p onclick="hideLogin()" class="return">&times</p>
+                <div class="row-flex">
+                    <img src="image/home.png" id="home-image">
+                    <h1 id="home-txt">私房美食地圖</h1>
+                </div>
+                <button id="google-login-btn">還不能用google帳號註冊</button>
+                <div class="divider">
+                    <hr>
+                        <span>或</span>
+                    <hr>
+                </div>
+                <p class="left-txt">使用者名稱</p>
+                <input id="signup-username" type="text" placeholder="請輸入使用者名稱">
+                <p class="left-txt">Email</p>
+                <input id="signup-email" type="text" placeholder="請輸入Email">
+                <p class="left-txt">密碼</p>
+                <input id="signup-password" type="password" placeholder="請輸入密碼">
+                <button onclick="signUp()" id="signup-btn">註冊</button>
+                <p id="error-text-signup" class="error-text"></p>
+            </div>
         </div>
     </div>
 
