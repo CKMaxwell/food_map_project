@@ -235,6 +235,7 @@ button {
   
 /* 登入盒 */
 .login-box {
+    display: none;
     background: white;
     padding: 30px;
     border-radius: 10px;
@@ -242,6 +243,11 @@ button {
     width: 300px;
     text-align: center;
 }
+
+.login-box.show {
+    display: block;
+}
+
 .login-box input {
     display: block;
     width: 100%;
@@ -301,6 +307,10 @@ button {
     width: 50%;
     text-align: center;
     overflow: hidden;    /* 若內有圖片等內容，避免超出邊界 */
+}
+
+.signup-box.show {
+    display: flex;
 }
 
 #signup-fig {
