@@ -345,18 +345,56 @@ button {
 }
 
 .tab-button.active {
-  background: #ffffff;
-  color: #000000;
-  font-weight: bold;
+    background: #ffffff;
+    color: #000000;
+    font-weight: bold;
 }
 
 .tab-content {
-  display: none;
-  /* padding: 16px; */
+    display: none;
+    /* padding: 16px; */
 }
 
 .tab-content.active {
-  display: block;
+    display: block;
+}
+
+/*設定內詳細資訊 */
+.section {
+    margin-top: 30px;
+}
+
+.section-title {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.info-label {
+    font-size: 14px;
+    color: #555;
+}
+
+.info-value {
+    font-size: 16px;
+}
+
+.arrow {
+    color: #ccc;
+    margin-left: 10px;
+}
+
+.info-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* 遮罩（預設隱藏） */

@@ -165,13 +165,17 @@ tabButtons.forEach(button => {
 function showSetting() {
   const setting = document.getElementById("setting");
   const dashboard = document.getElementById("dashboard");
+  const menu = document.getElementById('user-menu');
   setting.style.display = setting.style.display === 'flex' ? 'none' : 'flex'
-  dashboard.style.display = 'none'
+  dashboard.style.display = 'none';
+  menu.style.display = 'none';
 }
 // 設定-店家儀錶板內容
 function showDasboard() {
   const setting = document.getElementById("setting");
   const dashboard = document.getElementById("dashboard");
+  const menu = document.getElementById('user-menu');
   dashboard.style.display = dashboard.style.display === 'flex' ? 'none' : 'flex'
-  setting.style.display = 'none'
+  setting.style.display = 'none';
+  menu.style.display = 'none';
 }
