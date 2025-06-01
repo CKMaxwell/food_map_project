@@ -23,7 +23,24 @@
             <h2><span class="nearby-label">車站周邊美食</span></h2>
         </div>
         <div class="row">
-            <input type="text" placeholder="搜尋店家" />
+            <input id="main-search" type="text" placeholder="搜尋店家" />
+            <div class="search-result">
+                <div class="search-result-item row-flex" data-index="0" onclick="showInfo()">
+                    <img src="./image/restaurant_icon.png">假咖啡廳01
+                </div>
+                <div class="search-result-item row-flex" data-index="1" onclick="showInfo()">
+                    <img src="./image/restaurant_icon.png">假咖啡廳02
+                </div>
+                <div class="search-result-item row-flex" data-index="2" onclick="showInfo()">
+                    <img src="./image/restaurant_icon.png">假咖啡廳03
+                </div>
+                <div class="search-result-item row-flex" data-index="3" onclick="showInfo()">
+                    <img src="./image/restaurant_icon.png">假咖啡廳04
+                </div>
+                <div class="search-result-item row-flex" data-index="4" onclick="showInfo()">
+                    <img src="./image/restaurant_icon.png">假咖啡廳05
+                </div>
+            </div>
         </div>
         <div class="row tag-container">
             <span class="tag">價格範圍</span>
@@ -32,21 +49,92 @@
             <span class="tag">餐廳類型</span>
         </div>
     </div>
+    <!-- 店家資訊 -->
+    <div id="store-info" class="store-info">
+        <img src="./image/fake_coffe.jpg">
+        <div class="info row-flex">
+            <h1>假咖啡廳</h1>
+        </div>
+        <div class="info row-flex">
+            <img src="./image/icon_star.png">4.8
+        </div>
+        <div class="info row-flex">
+            <img src="./image/icon_map.png">
+            大馬路85號
+        </div>
+        <div class="info row-flex">
+            <img src="./image/icon_phone.png">
+            0800-000-001
+        </div>
+        <div class="info row-flex">
+            <img src="./image/icon_menu.png">
+            菜單
+        </div>
+        <div class="info row-flex">
+            <img src="./image/icon_email.png">
+            coffee@gmail.com
+        </div>
+    </div>
     <!-- 使用者資料 - 已登入 -->
     <div id="user-box-login">
         <div class="row-flex">
             <img src="image/home.png" id="home-image">
             <h1 id="home-txt">私房美食地圖</h1>
-            <button id="user-btn"></button>
+            <button id="user-btn">窩不枝盜</button>
         </div>
         <div class="user-menu" id="user-menu">
-            <div class="menu-item">
-                <a href="./user_dashboard.html">設定</a>
+            <div class="menu-item"  onclick="showSetting()">
+                <a>設定</a>
             </div>
-            <div class="menu-item">
-                <a href="./shop_dashboard.html">店家後台</a>
+            <div class="menu-item"  onclick="showDasboard()">
+                <a">店家後台</a>
             </div>
             <div class="menu-item" onclick="logOut()">登出</div>
+        </div>
+
+        <!-- 設定 -->
+        <div id="setting">
+            <div id="dashboard-main" class="row-flex">
+                <h1>設定</h1>
+                <button class="close-btn"  onclick="showSetting()">&times;</button>
+            </div>
+            <div class="tabs">
+                <button class="tab-button active" data-tab="user_tab1">個人與偏好</button>
+                <button class="tab-button" data-tab="user_tab2">儲存店家</button>
+                <button class="tab-button" data-tab="user_tab3">設定</button>
+            </div>
+            <div class="divider">
+                <hr>
+            </div>
+            <div class="tab-content active" id="user_tab1">
+                個人與偏好 的內容
+            </div>
+            <div class="tab-content" id="user_tab2">
+                儲存店家 的內容
+            </div>
+            <div class="tab-content" id="user_tab3">
+                設定 的內容
+            </div>
+        </div>
+        <!-- 店家後臺 -->
+        <div id="dashboard">
+            <div id="dashboard-main" class="row-flex">
+                <h1>店家後台</h1>
+                <button class="close-btn"  onclick="showDasboard()">&times;</button>
+            </div>
+            <div class="tabs">
+                <button class="tab-button active" data-tab="owner_tab1">店家儀表板</button>
+                <button class="tab-button" data-tab="owner_tab2">店家設定</button>
+            </div>
+            <div class="divider">
+                <hr>
+            </div>
+            <div class="tab-content active" id="owner_tab1">
+                店家儀表板 的內容
+            </div>
+            <div class="tab-content" id="owner_tab2">
+                店家設定 的內容
+            </div>
         </div>
     </div>
     

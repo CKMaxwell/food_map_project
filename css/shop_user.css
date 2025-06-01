@@ -94,6 +94,88 @@ input[type="text"], input[type="password"] {
     padding: 0px 5px;
 }
 
+/* 主要搜尋欄：有輸入時要加入的 class */
+.input-filled {
+    border-color: green;
+    background-color: #eaffea;
+}
+
+.search-result {
+    background-color: #ffffff;
+    display: none;
+    width: 100%;
+    margin: 10px 0;
+    padding: 0px 5px;
+    border: 2px solid #e5e5e5;
+    border-radius: 10px;
+    /* height: 60px; */
+}
+
+.search-result.show {
+    display: block;
+}
+
+.search-result-item {
+    background-color: #ffffff;
+    width: 100%;
+    margin: 5px 0;
+    padding: 0px 5px;
+    border: none;
+    border-radius: 10px;
+    height: 40px;
+    font-size: 14px;
+}
+
+.search-result-item:hover {
+    background-color: #fae8e7;
+}
+
+.search-result-item img {
+    height: 40%;
+    padding: 0px 2px;
+    width: auto;
+    object-fit: cover;
+}
+
+/* 搜尋顯示店家詳細資訊 */
+#store-info {
+    background: rgba(255, 255, 255, 1);
+    position: absolute;
+    top: 0px;
+    left: 50px;
+    width: 300px;
+    /* height: 500px; */
+    border-radius: 10px;
+    z-index: 500;
+    font-size: 14px;
+    overflow: hidden; /* 加這行才能裁掉超出部分 */
+}
+
+.store-info {
+    display: none;
+}
+
+.store-info.show {
+    display: block;
+}
+
+#store-info h1 {
+    font-size: 25px;
+}
+
+#store-info>img {
+    width: 100%;
+}
+
+#store-info .info {
+    height: 20px;
+    margin: 5px;
+}
+
+#store-info img {
+    height: 100%;
+}
+
 .tag {
     background-color: #ffffff;
     padding: 4px 8px;
@@ -108,7 +190,7 @@ input[type="text"], input[type="password"] {
     background-color: #333;
     color: white;
     border-color: #333;
-  }
+}
 
 #user-box-default {
     /* display: none; */
@@ -117,7 +199,7 @@ input[type="text"], input[type="password"] {
     right: 15px;
     /* width: 400px; */
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.8);;
+    background: rgba(255, 255, 255, 0.8);
     z-index: 500;
     padding: 10px;
 }
@@ -214,6 +296,68 @@ button {
     color: #000000;
 }
 
+#setting {
+    margin-top: 10px;
+    display: none; /* 預設隱藏 */
+    flex-direction: column;
+    background-color: #ffffff;
+    /* width: 10px; */
+    /* height: 10px; */
+}
+
+#dashboard {
+    margin-top: 10px;
+    display: none; /* 預設隱藏 */
+    flex-direction: column;
+    background-color: #ffffff;
+    /* width: 10px; */
+    /* height: 10px; */
+}
+
+#dashboard-main {
+    min-width: 350px;
+    justify-content: space-between; /* 左右貼邊 */
+    align-items: center;            /* 垂直置中 */
+    padding: 5px;
+}
+
+#dashboard-main h1 {
+    color: #65000B;
+    font-size: 20px;
+}
+
+.close-btn {
+    font-size: 24px;
+    color: #000000;
+    background: none;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.tab-button {
+  /* padding: 8px 16px; */
+  /* border: 1px solid #ccc; */
+  background: #ffffff;
+  color: #6e6e6e;
+  cursor: pointer;
+  
+}
+
+.tab-button.active {
+  background: #ffffff;
+  color: #000000;
+  font-weight: bold;
+}
+
+.tab-content {
+  display: none;
+  /* padding: 16px; */
+}
+
+.tab-content.active {
+  display: block;
+}
 
 /* 遮罩（預設隱藏） */
 .overlay {

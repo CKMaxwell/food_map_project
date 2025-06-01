@@ -29,6 +29,71 @@ document.querySelectorAll('.tag').forEach(tag => {
   });
 });
 
+
+// 搜尋-彈出搜尋結果
+mainInputBox = document.getElementById("main-search")
+let isComposing = false;
+
+// 搜尋-彈出搜尋結果:開始組字（中文輸入中）
+mainInputBox.addEventListener('compositionstart', () => {
+  isComposing = true;
+});
+
+// 搜尋-彈出搜尋結果:組字結束（輸入確定，例如選字或按空白）
+mainInputBox.addEventListener('compositionend', () => {
+  isComposing = false;
+  updateInputStyle();
+});
+
+// 搜尋-彈出搜尋結果:一般輸入
+mainInputBox.addEventListener('input', () => {
+  if (!isComposing) {
+    updateInputStyle();
+  }
+});
+
+function updateInputStyle() {
+  const elements = document.getElementsByClassName('search-result');
+
+  if (mainInputBox.value.trim() !== '') {
+    mainInputBox.classList.add('input-filled');
+    for (let el of elements) {
+      el.classList.add('show');
+    }
+  } else {
+    mainInputBox.classList.remove('input-filled');
+    for (let el of elements) {
+      el.classList.remove('show');
+    }
+  }
+}
+
+// 抓取位置
+const searchBox = document.getElementById('search-box');
+const storeInfo = document.getElementById('store-info');
+function updatePosition() {
+  const bottomY = searchBox.getBoundingClientRect().bottom + window.scrollY;
+  storeInfo.style.top = (bottomY + 5) + 'px';
+}
+
+// 顯示
+function showInfo() {
+  const storeInfo = document.getElementById('store-info');
+  storeInfo.classList.toggle('show');
+}
+
+// 初始設定一次
+updatePosition();
+
+// 監聽視窗大小改變或滾動
+window.addEventListener('resize', updatePosition);
+window.addEventListener('scroll', updatePosition);
+
+// 監聽 searchBox 自身大小改變
+const observer = new ResizeObserver(updatePosition);
+observer.observe(searchBox);
+
+
 // 路由設定
 function showModal(type) {
   // closeModal();
