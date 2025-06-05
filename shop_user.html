@@ -101,7 +101,7 @@
             <div class="tabs">
                 <button class="tab-button active" data-tab="user_tab1">個人與偏好</button>
                 <button class="tab-button" data-tab="user_tab2">儲存店家</button>
-                <button class="tab-button" data-tab="user_tab3">設定</button>
+                <!-- <button class="tab-button" data-tab="user_tab3">設定</button> -->
             </div>
             <div class="divider">
                 <hr>
@@ -133,7 +133,6 @@
 
                 <div class="section">
                     <div class="section-title">偏好設定</div>
-
                     <div class="info-row">
                         <div class="info-label">語言</div>
                         <div class="info-block">
@@ -142,15 +141,42 @@
                         </div>
                     </div>
                 </div>
-
-                
             </div>
             <div class="tab-content" id="user_tab2">
-                儲存店家 的內容
+                <div class="section">
+                    <div class="section-title">喜愛店家</div>
+                    <div class="store-card">
+                        <div class="store-top">
+                            <div class="store-name">米餐廳</div>
+                            <div class="arrow">›</div>
+                        </div>
+                        <div class="store-meta">
+                            <img src="./image/selection_icon.png">
+                            <p>台北車站</p>
+                            <img src="./image/love_plus.png">
+                            <p>1800/1/1</p>
+                        </div>
+                        <div class="store-desc">點擊新增註解</div>
+                    </div>
+
+                    <div class="store-card">
+                        <div class="store-top">
+                            <div class="store-name">星星克一號店</div>
+                            <div class="arrow">›</div>
+                        </div>
+                        <div class="store-meta">
+                            <img src="./image/selection_icon.png">
+                            <p>基隆車站</p>
+                            <img src="./image/love_plus.png">
+                            <p>2000/1/2</p>
+                        </div>
+                        <div class="store-desc">適合約會</div>
+                    </div>
+                </div>
             </div>
-            <div class="tab-content" id="user_tab3">
+            <!-- <div class="tab-content" id="user_tab3">
                 設定 的內容
-            </div>
+            </div> -->
         </div>
         <!-- 店家後臺 -->
         <div id="dashboard">
@@ -160,17 +186,98 @@
             </div>
             <div class="tabs">
                 <button class="tab-button active" data-tab="owner_tab1">店家儀表板</button>
-                <button class="tab-button" data-tab="owner_tab2">店家設定</button>
+                <!-- <button class="tab-button" data-tab="owner_tab2">店家設定</button> -->
             </div>
             <div class="divider">
                 <hr>
             </div>
             <div class="tab-content active" id="owner_tab1">
-                店家儀表板 的內容
+                <!-- 統計資料 -->
+                <div class="card">
+                    <img alt="store">
+                    <div class="card-content">
+                        <div class="store-name">大馬路咖啡廳</div>
+                        <div class="store-meta">簡餐、西式、下午茶</div>
+                        <div class="store-meta">📍 大馬路 85 號</div>
+                        <div class="store-meta">📞 0800-000-001</div>
+                        <div class="email">📧 bigroad@gmail.com</div>
+                    </div>
+                    <img class="avatar" src="./avatar.png" alt="avatar">
+                </div>
+
+                <div class="stats">
+                    <div>
+                        <div class="stat-value">102</div>
+                        <div class="stat-label">點擊次數</div>
+                    </div>
+                    <div>
+                        <div class="stat-value">9</div>
+                        <div class="stat-label">被列入喜愛</div>
+                    </div>
+                    <div>
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">被列入觀察</div>
+                    </div>
+                    <div>
+                        <div class="stat-value">4.8 ▲</div>
+                        <div class="stat-label">客戶評價</div>
+                    </div>
+                </div>
+                <!-- 基礎資料 -->
+                <div class="section-title">基礎資料</div>
+
+                <div class="info-item">
+                    <div class="info-label">店家名稱</div>
+                    <div class="info-value">大馬路咖啡廳</div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">店家地址</div>
+                    <div class="info-value">大馬路 85 號</div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">聯絡信箱</div>
+                    <div class="info-value">bigroad@gmail.com</div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">聯絡電話</div>
+                    <div class="info-value">0800 000 001</div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">店家標籤</div>
+                    <div class="info-value">簡餐、西式、下午茶</div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">菜單（圖片）</div>
+                    <img class="avatar" alt="menu avatar">
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">菜單（連結）</div>
+                    <div class="info-value">點擊查看</div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">封面圖片</div>
+                    <div class="img-list">
+                        <img>
+                        <img>
+                    </div>
+                </div>
+
+
+
+
+
+
             </div>
-            <div class="tab-content" id="owner_tab2">
+            <!-- <div class="tab-content" id="owner_tab2">
                 店家設定 的內容
-            </div>
+            </div> -->
         </div>
     </div>
     

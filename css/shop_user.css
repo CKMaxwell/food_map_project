@@ -348,6 +348,8 @@ button {
     background: #ffffff;
     color: #000000;
     font-weight: bold;
+    border-bottom: 2px solid red;
+    border-radius: 0px;
 }
 
 .tab-content {
@@ -366,9 +368,19 @@ button {
 
 .section-title {
     font-weight: bold;
-    margin-bottom: 15px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
+.arrow {
+    color: #ccc;
+    margin-left: 10px;
+}
+
+/*設定-個人資料 */
 .info-row {
     display: flex;
     justify-content: space-between;
@@ -386,17 +398,136 @@ button {
     font-size: 16px;
 }
 
-.arrow {
-    color: #ccc;
-    margin-left: 10px;
-}
-
 .info-block {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+/*設定-儲存店家 */
+.store-card {
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.store-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.store-name {
+    font-weight: bold;
+}
+
+.store-meta {
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    color: #666;
+    margin: 4px 0;
+    align-items: center;
+}
+
+.store-meta img {
+    height: 10px;
+}
+
+.store-desc {
+    font-size: 14px;
+    color: #444;
+    margin-top: 4px;
+    white-space: pre-wrap;
+}
+
+/* 店家儀錶板 */
+.card {
+    display: flex;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+
+.card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.card-content {
+    flex: 1;
+}
+
+.store-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.store-meta {
+    font-size: 14px;
+    color: #555;
+    margin-top: 4px;
+}
+
+.email {
+    font-size: 14px;
+    color: #333;
+    margin-top: 4px;
+}
+
+.avatar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    margin: 20px 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.stat-value {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.info-label {
+    color: #666;
+}
+
+.info-value {
+    color: #111;
+}
+
+.img-list {
+    display: flex;
+    gap: 10px;
+}
+
+.img-list img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 4px;
+}
 /* 遮罩（預設隱藏） */
 .overlay {
     display: none;
