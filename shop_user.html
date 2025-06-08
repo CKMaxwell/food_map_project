@@ -80,7 +80,7 @@
         <div class="row-flex">
             <img src="image/home.png" id="home-image">
             <h1 id="home-txt">私房美食地圖</h1>
-            <button id="user-btn">窩不枝盜</button>
+            <button id="user-btn" class="txt-name">新使用者</button>
         </div>
         <div class="user-menu" id="user-menu">
             <div class="menu-item"  onclick="showSetting()">
@@ -113,20 +113,20 @@
                     <div class="info-row">
                         <div class="info-label">用戶名稱</div>
                         <div class="info-block">
-                            <div class="info-value">窩不枝盜</div>
-                            <div class="arrow">›</div>
+                            <div class="info-value txt-name">新使用者</div>
+                            <div class="arrow" onclick="showUpdateDiv()">›</div>
                         </div>
                     </div>
 
                     <div class="info-row">
                         <div class="info-label">電子信箱</div>
-                        <div class="info-value">ancdefg@gmail.com</div>
+                        <div class="info-value txt-email">新增電子信箱</div>
                     </div>
                     <div class="info-row">
                         <div class="info-label">電話</div>
                         <div class="info-block">
-                            <div class="info-value">+886 9*****123</div>
-                            <div class="arrow">›</div>
+                            <div class="info-value txt-phone">新增電話號碼</div>
+                            <div class="arrow" onclick="showUpdateDiv()">›</div>
                         </div>
                     </div>
                 </div>
@@ -136,8 +136,8 @@
                     <div class="info-row">
                         <div class="info-label">語言</div>
                         <div class="info-block">
-                            <div class="info-value">中文</div>
-                            <div class="arrow">›</div>
+                            <div class="info-value txt-language">中文</div>
+                            <div class="arrow" onclick="showUpdateDiv()">›</div>
                         </div>
                     </div>
                 </div>
@@ -202,7 +202,7 @@
                         <div class="store-meta">📞 0800-000-001</div>
                         <div class="email">📧 bigroad@gmail.com</div>
                     </div>
-                    <img class="avatar" src="./avatar.png" alt="avatar">
+                    <img class="avatar" alt="avatar">
                 </div>
 
                 <div class="stats">
@@ -278,6 +278,30 @@
             <!-- <div class="tab-content" id="owner_tab2">
                 店家設定 的內容
             </div> -->
+        </div>
+    </div>
+    <div id="UpdateOverlay" class="overlay">
+        <div id="UpdateData">
+            <p onclick="hideUpdateDiv()" class="return">&times</p>
+            <h1>更新資訊</h1>
+            <p>用戶名稱</p>
+            <input id="update-username" type="text">
+            <p>電話</p>
+            <input id="update-phone" type="text">
+            <p>語言</p>
+            <label>
+                <input type="radio" name="language" value="中文">
+                中文
+            </label>
+            <label>
+                <input type="radio" name="language" value="英文">
+                英文
+            </label>
+            <label>
+                <input type="radio" name="language" value="日文">
+                日文
+            </label>
+            <button onclick="updateUserData()">確定</button>
         </div>
     </div>
     

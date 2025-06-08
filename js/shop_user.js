@@ -2,9 +2,8 @@
 const map = L.map('map').setView([25.0478, 121.5170], 17);
 
 // const清單
-const baseUrl = new URL('https://north11.onrender.com/api/users');
+const baseUrl = new URL('https://north11.onrender.com/api/users/');
 // const baseUrl = new URL('http://localhost:8000/api/users/');
-let token = "";
 
 // 加入 OpenStreetMap 圖層
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -179,3 +178,118 @@ function showDasboard() {
   setting.style.display = 'none';
   menu.style.display = 'none';
 }
+
+async function checkAuth() {
+  const token = localStorage.getItem('token');
+  const UrlCheckAuth = new URL('check', baseUrl);
+  try {
+    const res = await fetch(UrlCheckAuth.href, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      }
+    });
+    const data = await res.json();
+    // console.log("checkAuth 函數成功呼叫");
+    // console.log(data);
+    return data;
+  } catch (err) {
+    // console.log(err);
+    return err;
+  }
+}
+
+async function awaitAuth() {
+  const authResult = await checkAuth();
+  // console.log(authResult);
+  if (authResult.isLoggedIn !== true) {
+    console.log("登入驗證失敗")
+    // window.location.href = './#/login';
+  } else if (authResult.isLoggedIn === true) {
+    console.log("登入驗證成功")
+  }
+}
+
+// 取得使用者資料，並更新對應欄位文字
+async function getUserData() {
+  // newName = document.getElementById('update-username');
+  // newPhone = document.getElementById('update-phone');
+  // const selectedLanguage = document.querySelector('input[name="language"]:checked');
+
+  const token = localStorage.getItem('token');
+  const UrlUpdateUserData = new URL('profile', baseUrl);
+  const res = await fetch(UrlUpdateUserData.href, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      }
+  });
+  const data = await res.json();
+  userName = document.getElementsByClassName('txt-name')
+  for (let i = 0; i < userName.length; i++) {
+    userName[i].textContent = data['data']['user']['name']
+  }
+  userEmail = document.getElementsByClassName('txt-email')
+  for (let i = 0; i < userEmail.length; i++) {
+    userEmail[i].textContent = data['data']['user']['email']
+  }
+  userPhone = document.getElementsByClassName('txt-phone')
+  for (let i = 0; i < userPhone.length; i++) {
+    userPhone[i].textContent = data['data']['user']['phonenumber']
+  }
+  userLanguage = document.getElementsByClassName('txt-language')
+  for (let i = 0; i < userLanguage.length; i++) {
+    userLanguage[i].textContent = data['data']['user']['region']
+  }
+}
+
+// 顯示：更新資料的div
+function showUpdateDiv() {
+  document.getElementById('UpdateOverlay').style.display = 'flex';
+}
+
+function hideUpdateDiv() {
+  document.getElementById('UpdateOverlay').style.display = 'none';
+}
+
+// 更新使用者資料
+async function updateUserData() {
+  newName = document.getElementById('update-username');
+  newPhone = document.getElementById('update-phone');
+  const selectedLanguage = document.querySelector('input[name="language"]:checked');
+
+  const token = localStorage.getItem('token');
+  const UrlUpdateUserData = new URL('update', baseUrl);
+  const res = await fetch(UrlUpdateUserData.href, {
+      method: 'PUT',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      }, 
+      body: JSON.stringify({
+        "name": newName.value,
+        "region": selectedLanguage.value,
+        "phonenumber": newPhone.value
+      })
+  });
+  const data = await res.json();
+  userName = document.getElementsByClassName('txt-name')
+  for (let i = 0; i < userName.length; i++) {
+    userName[i].textContent = data['data']['user']['name']
+  }
+  userPhone = document.getElementsByClassName('txt-phone')
+  for (let i = 0; i < userPhone.length; i++) {
+    userPhone[i].textContent = data['data']['user']['phonenumber']
+  }
+  userLanguage = document.getElementsByClassName('txt-language')
+  for (let i = 0; i < userLanguage.length; i++) {
+    userLanguage[i].textContent = data['data']['user']['region']
+  }
+}
+
+//// 載入頁面
+// 頁面載入時檢查是否已登入
+awaitAuth()
+getUserData();

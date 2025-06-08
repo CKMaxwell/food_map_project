@@ -380,6 +380,10 @@ button {
     margin-left: 10px;
 }
 
+.arrow:hover {
+    cursor: pointer;
+}
+
 /*設定-個人資料 */
 .info-row {
     display: flex;
@@ -653,4 +657,31 @@ button {
 .error-text {
     color: #db2222;
     font-size: 12px;
+}
+
+/* 遮罩（預設隱藏） */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;  /* 水平置中 */
+    align-items: center;      /* 垂直置中 */
+    z-index: 1000;
+}
+
+#UpdateData {
+    display: block;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    width: 300px;
+    /* text-align: center; */
+}
+#UpdateData button {
+    display: block;
+    width: 100%;
 }

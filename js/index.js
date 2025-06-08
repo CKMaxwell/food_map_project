@@ -4,7 +4,6 @@ const map = L.map('map').setView([25.0478, 121.5170], 17);
 // const清單
 const baseUrl = new URL('https://north11.onrender.com/api/users/');
 // const baseUrl = new URL('http://localhost:8000/api/users/');
-let token = "";
 
 // 加入 OpenStreetMap 圖層
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -114,12 +113,12 @@ window.addEventListener('DOMContentLoaded', () => {
   if (location.pathname === '/#/signup') showModal('signup');
 });
 
-// 檢查登入狀態
-function isLoggedIn() {
-  // 以有 token 為例判斷登入狀態
-  const token = localStorage.getItem('token');
-  return token && token !== '';
-}
+// 檢查登入狀態 (這是舊版本 不要用)
+// function isLoggedIn() {
+//   // 以有 token 為例判斷登入狀態
+//   const token = localStorage.getItem('token');
+//   return token && token !== '';
+// }
 
 // 登入畫面
 function showLogin() {
@@ -196,6 +195,7 @@ function login() {
 
         // 儲存 token 到 localStorage
         localStorage.setItem('token', token);
+        checkAuth();
         // 導向另一個靜態頁面
         window.location.href = './shop_user.html';
       }
@@ -211,6 +211,22 @@ function login() {
         errorTxt.textContent = '';
       }, 3000)
     });
+}
+async function checkAuth() {
+  const token = localStorage.getItem('token');
+  const UrlCheckAuth = new URL('check', baseUrl);
+  const res = await fetch(UrlCheckAuth.href, {
+      method: 'GET',
+      headers: {
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json'
+    }
+  });
+
+  const data = await res.json();
+  console.log("checkAuth 函數成功呼叫")
+  console.log(data)
+  // statusEl.textContent = res.ok ? '登入狀態：成功 ✅，使用者：' + data.user.username : '驗證失敗 ❌：' + data.message;
 }
 
 // function logOut() {
