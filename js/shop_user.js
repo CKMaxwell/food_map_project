@@ -205,7 +205,7 @@ async function awaitAuth() {
   // console.log(authResult);
   if (authResult.isLoggedIn !== true) {
     console.log("登入驗證失敗")
-    // window.location.href = './#/login';
+    window.location.href = './#/login';
   } else if (authResult.isLoggedIn === true) {
     console.log("登入驗證成功")
   }
@@ -213,10 +213,6 @@ async function awaitAuth() {
 
 // 取得使用者資料，並更新對應欄位文字
 async function getUserData() {
-  // newName = document.getElementById('update-username');
-  // newPhone = document.getElementById('update-phone');
-  // const selectedLanguage = document.querySelector('input[name="language"]:checked');
-
   const token = localStorage.getItem('token');
   const UrlUpdateUserData = new URL('profile', baseUrl);
   const res = await fetch(UrlUpdateUserData.href, {
