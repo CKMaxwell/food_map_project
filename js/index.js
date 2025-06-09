@@ -2,8 +2,8 @@
 const map = L.map('map').setView([25.0478, 121.5170], 17);
 
 // const清單
-// const baseUrl = new URL('https://north11.onrender.com/api/users/');
-const baseUrl = new URL('http://localhost:8000/api/users/');
+const baseUrl = new URL('https://north11.onrender.com/api/users/');
+// const baseUrl = new URL('http://localhost:8000/api/users/');
 
 // 加入 OpenStreetMap 圖層
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
