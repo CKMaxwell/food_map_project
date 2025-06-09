@@ -25,20 +25,25 @@
         <div class="row">
             <input id="main-search" type="text" placeholder="搜尋店家" />
             <div class="search-result">
-                <div class="search-result-item row-flex" data-index="0" onclick="showInfo()">
-                    <img src="./image/restaurant_icon.png">假咖啡廳01
+                <div class="search-result-item row-flex" data-index="0" onclick="showInfo(0)">
+                    <img src="./image/restaurant_icon.png">
+                    <p class="store-name">假咖啡廳01</p>
                 </div>
-                <div class="search-result-item row-flex" data-index="1" onclick="showInfo()">
-                    <img src="./image/restaurant_icon.png">假咖啡廳02
+                <div class="search-result-item row-flex" data-index="1" onclick="showInfo(1)">
+                    <img src="./image/restaurant_icon.png">
+                    <p class="store-name">假咖啡廳01</p>
                 </div>
-                <div class="search-result-item row-flex" data-index="2" onclick="showInfo()">
-                    <img src="./image/restaurant_icon.png">假咖啡廳03
+                <div class="search-result-item row-flex" data-index="2" onclick="showInfo(2)">
+                    <img src="./image/restaurant_icon.png">
+                    <p class="store-name">假咖啡廳01</p>
                 </div>
-                <div class="search-result-item row-flex" data-index="3" onclick="showInfo()">
-                    <img src="./image/restaurant_icon.png">假咖啡廳04
+                <div class="search-result-item row-flex" data-index="3" onclick="showInfo(3)">
+                    <img src="./image/restaurant_icon.png">
+                    <p class="store-name">假咖啡廳01</p>
                 </div>
-                <div class="search-result-item row-flex" data-index="4" onclick="showInfo()">
-                    <img src="./image/restaurant_icon.png">假咖啡廳05
+                <div class="search-result-item row-flex" data-index="4" onclick="showInfo(4)">
+                    <img src="./image/restaurant_icon.png">
+                    <p class="store-name">假咖啡廳01</p>
                 </div>
             </div>
         </div>
@@ -53,26 +58,26 @@
     <div id="store-info" class="store-info">
         <img src="./image/fake_coffe.jpg">
         <div class="info row-flex">
-            <h1>假咖啡廳</h1>
+            <p id="info-name">假咖啡廳</p>
         </div>
         <div class="info row-flex">
             <img src="./image/icon_star.png">4.8
         </div>
         <div class="info row-flex">
             <img src="./image/icon_map.png">
-            大馬路85號
+            <p id="info-address">大馬路85號</p>
         </div>
         <div class="info row-flex">
             <img src="./image/icon_phone.png">
-            0800-000-001
+            <p id="info-phone">0800-000-001</p>
         </div>
         <div class="info row-flex">
             <img src="./image/icon_menu.png">
-            菜單
+            <p>菜單</p>
         </div>
         <div class="info row-flex">
             <img src="./image/icon_email.png">
-            coffee@gmail.com
+            <p id="info-email">coffee@gmail.com</p>
         </div>
     </div>
     <!-- 使用者資料 - 未登入 -->

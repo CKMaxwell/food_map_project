@@ -2,8 +2,8 @@
 const map = L.map('map').setView([25.0478, 121.5170], 17);
 
 // const清單
-const baseUrl = new URL('https://north11.onrender.com/api/users/');
-// const baseUrl = new URL('http://localhost:8000/api/users/');
+// const baseUrl = new URL('https://north11.onrender.com/api/users/');
+const baseUrl = new URL('http://localhost:8000/api/users/');
 
 // 加入 OpenStreetMap 圖層
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -51,14 +51,21 @@ mainInputBox.addEventListener('input', () => {
   }
 });
 
-function updateInputStyle() {
+async function updateInputStyle() {
   const elements = document.getElementsByClassName('search-result');
 
   if (mainInputBox.value.trim() !== '') {
     mainInputBox.classList.add('input-filled');
+    const result = await search()
+    const eachResult = document.getElementsByClassName('store-name');
+
+    for (let i = 0; i < result.length; i++) {
+      eachResult[i].textContent = result[i].name;
+    }
     for (let el of elements) {
       el.classList.add('show');
     }
+    
   } else {
     mainInputBox.classList.remove('input-filled');
     for (let el of elements) {
@@ -76,8 +83,18 @@ function updatePosition() {
 }
 
 // 顯示
-function showInfo() {
+async function showInfo(index) {
+  const result = await search()
+  
   const storeInfo = document.getElementById('store-info');
+  const storeName = document.getElementById('info-name');
+  const storeAddress = document.getElementById('info-address');
+  const storePhone = document.getElementById('info-phone');
+  const storeEmail = document.getElementById('info-email');
+  storeName.textContent = result[index]['name']
+  storeAddress.textContent = result[index]['location']
+  storePhone.textContent = result[index]['phone']
+  storeEmail.textContent = result[index]['email']  
   storeInfo.classList.toggle('show');
 }
 
@@ -248,7 +265,7 @@ function signUp() {
   const email = document.getElementById('signup-email');
   const password = document.getElementById('signup-password');
   const errorTxt = document.getElementById('error-text-signup');
-  // 呼註冊api
+  // 呼叫註冊api
   const UrlSignUp = new URL('sign-up', baseUrl);
   console.log(UrlSignUp.href)
   fetch(UrlSignUp.href, {
@@ -281,4 +298,22 @@ function signUp() {
         errorTxt.textContent = "";
       }, 3000)
     });
+}
+
+// 搜尋函數
+async function search() {
+  // 呼叫搜尋api
+  const UrlSearch = new URL('restaurants', baseUrl);
+  try {
+    const res = await fetch(UrlSearch.href, {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const data = await res.json();
+    return data.data;
+  } catch(err) {
+    return err;
+  }
 }
