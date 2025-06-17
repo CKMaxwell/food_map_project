@@ -58,8 +58,7 @@ async function updateInputStyle() {
     mainInputBox.classList.add('input-filled');
     const result = await search()
     const eachResult = document.getElementsByClassName('store-name');
-
-    for (let i = 0; i < result.length; i++) {
+    for (let i = 0; i <= 4; i++) {
       eachResult[i].textContent = result[i].name;
     }
     for (let el of elements) {
@@ -316,4 +315,22 @@ async function search() {
   } catch(err) {
     return err;
   }
+}
+
+// 顯示
+function showSelectSetting(item) {
+  if (item == 1) {
+    settingBox = document.getElementById("select-price")
+    settingBox.classList.toggle("show")
+  } else if (item == 2) {
+    settingBox = document.getElementById("select-time")
+    settingBox.classList.toggle("show")
+  } else if (item == 3) {
+    settingBox = document.getElementById("select-distance")
+    settingBox.classList.toggle("show")
+  } else if (item == 4) {
+    settingBox = document.getElementById("select-type")
+    settingBox.classList.toggle("show")
+  }
+  
 }

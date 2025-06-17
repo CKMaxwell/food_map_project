@@ -424,3 +424,29 @@ button {
     color: #db2222;
     font-size: 12px;
 }
+
+/* 篩選box */
+#select-price {
+    display: none;
+}
+#select-price.show {
+    display: block;
+}
+#select-time {
+    display: none;
+}
+#select-time.show {
+    display: block;
+}
+#select-distance {
+    display: none;
+}
+#select-distance.show {
+    display: block;
+}
+#select-type {
+    display: none;
+}
+#select-type.show {
+    display: block;
+}

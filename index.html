@@ -48,10 +48,55 @@
             </div>
         </div>
         <div class="row tag-container">
-            <span class="tag">價格範圍</span>
-            <span class="tag">營業時間</span>
-            <span class="tag">與車站距離</span>
-            <span class="tag">餐廳類型</span>
+            <span class="tag" onclick="showSelectSetting(1)">價格範圍</span>
+            <span class="tag" onclick="showSelectSetting(2)">營業時間</span>
+            <span class="tag" onclick="showSelectSetting(3)">與車站距離</span>
+            <span class="tag" onclick="showSelectSetting(4)">餐廳類型</span>
+        </div>
+        <div id="select-price">
+            <span>$0 ~ ~100000</span>
+            <input type="range" min="0" max="50000">
+            <div class="row">
+                <button>恢復預設</button>
+                <button>完成</button>
+            </div>
+        </div>
+        <div id="select-time">
+            <form>
+                <label><input type="checkbox" name="category" value="00:00-08:00">00:00-08:00</label><br>
+                <label><input type="checkbox" name="category" value="08:00-12:00">08:00-12:00</label><br>
+                <label><input type="checkbox" name="category" value="12:00-18:00">12:00-18:00</label><br>
+                <label><input type="checkbox" name="category" value="18:00-24:00">18:00-24:00</label><br>
+            </form>
+            <div class="row">
+                <button>恢復預設</button>
+                <button>完成</button>
+            </div>
+        </div>
+        <div id="select-distance">
+            <form>
+                <label><input type="checkbox" name="category" value="100公尺以內"> 100公尺以內</label><br>
+                <label><input type="checkbox" name="category" value="101-300公尺"> 101-300公尺</label><br>
+                <label><input type="checkbox" name="category" value="301-500公尺"> 301-500公尺</label><br>
+                <label><input type="checkbox" name="category" value="501-1000公尺"> 501-1000公尺</label><br>
+                <label><input type="checkbox" name="category" value="一公里以上"> 一公里以上</label><br>
+            </form>
+            <div class="row">
+                <button>恢復預設</button>
+                <button>完成</button>
+            </div>
+        </div>
+        <div id="select-type">
+            <form>
+                <label><input type="checkbox" name="category" value="中式"> 中式</label><br>
+                <label><input type="checkbox" name="category" value="日式"> 日式</label><br>
+                <label><input type="checkbox" name="category" value="韓式"> 韓式</label><br>
+                <label><input type="checkbox" name="category" value="義式"> 義式</label><br>
+            </form>
+            <div class="row">
+                <button>恢復預設</button>
+                <button>完成</button>
+            </div>
         </div>
     </div>
     <!-- 店家資訊 -->
