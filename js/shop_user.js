@@ -1,95 +1,16 @@
-// 初始化地圖，中心點設在台北車站，縮放等級 17
-const map = L.map('map').setView([25.0478, 121.5170], 17);
-
-// const清單
-const baseUrl = new URL('https://north11.onrender.com/api/users/');
-// const baseUrl = new URL('http://localhost:8000/api/users/');
-
-// 加入 OpenStreetMap 圖層
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '地圖資料 © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> 貢獻者'
-  }).addTo(map);
-
-// 
-const selectedTags = new Set();
-
-document.querySelectorAll('.tag').forEach(tag => {
-  tag.addEventListener('click', () => {
-    const value = tag.textContent;
-
-    if (tag.classList.contains('selected')) {
-      tag.classList.remove('selected');
-      selectedTags.delete(value);
-    } else {
-      tag.classList.add('selected');
-      selectedTags.add(value);
-    }
-    // console.log([...selectedTags]); // 可用於API參數
+// 導入共用map
+fetch("./map.html")
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('common-map').innerHTML = html;
+    // 初始化地圖，中心點設在台北車站，縮放等級 17
+    const map = L.map('map').setView([25.0478, 121.5170], 17);
+    // 加入 OpenStreetMap 圖層
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '地圖資料 © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> 貢獻者'
+      }).addTo(map);
   });
-});
 
-// 搜尋-彈出搜尋結果
-mainInputBox = document.getElementById("main-search")
-let isComposing = false;
-
-// 搜尋-彈出搜尋結果:開始組字（中文輸入中）
-mainInputBox.addEventListener('compositionstart', () => {
-  isComposing = true;
-});
-
-// 搜尋-彈出搜尋結果:組字結束（輸入確定，例如選字或按空白）
-mainInputBox.addEventListener('compositionend', () => {
-  isComposing = false;
-  updateInputStyle();
-});
-
-// 搜尋-彈出搜尋結果:一般輸入
-mainInputBox.addEventListener('input', () => {
-  if (!isComposing) {
-    updateInputStyle();
-  }
-});
-
-function updateInputStyle() {
-  const elements = document.getElementsByClassName('search-result');
-
-  if (mainInputBox.value.trim() !== '') {
-    mainInputBox.classList.add('input-filled');
-    for (let el of elements) {
-      el.classList.add('show');
-    }
-  } else {
-    mainInputBox.classList.remove('input-filled');
-    for (let el of elements) {
-      el.classList.remove('show');
-    }
-  }
-}
-
-// 抓取位置
-const searchBox = document.getElementById('search-box');
-const storeInfo = document.getElementById('store-info');
-function updatePosition() {
-  const bottomY = searchBox.getBoundingClientRect().bottom + window.scrollY;
-  storeInfo.style.top = (bottomY + 5) + 'px';
-}
-
-// 顯示
-function showInfo() {
-  const storeInfo = document.getElementById('store-info');
-  storeInfo.classList.toggle('show');
-}
-
-// 初始設定一次
-updatePosition();
-
-// 監聽視窗大小改變或滾動
-window.addEventListener('resize', updatePosition);
-window.addEventListener('scroll', updatePosition);
-
-// 監聽 searchBox 自身大小改變
-const observer = new ResizeObserver(updatePosition);
-observer.observe(searchBox);
 
 
 // 路由設定
@@ -111,13 +32,6 @@ window.addEventListener('DOMContentLoaded', () => {
   if (location.pathname === '/signup') showModal('signup');
 });
 
-// 檢查登入狀態
-function isLoggedIn() {
-  // 以有 token 為例判斷登入狀態
-  const token = localStorage.getItem('token');
-  return token && token !== '';
-}
-
 function logOut() {
   // document.getElementById("user-box-default").style.display = "block";
   // document.getElementById("user-box-login").style.display = "none";
@@ -128,12 +42,12 @@ function logOut() {
 }
 
 // 登入頁面轉註冊頁面
-function toSignIn() {
-  document.getElementById('login-box').classList.remove('show');
-  document.getElementById("signup-box").classList.add('show')
-  history.pushState({ modal: 'signup' }, '', '/signup');
-  showModal('signup');
-}
+// function toSignIn() {
+//   document.getElementById('login-box').classList.remove('show');
+//   document.getElementById("signup-box").classList.add('show')
+//   history.pushState({ modal: 'signup' }, '', '/signup');
+//   showModal('signup');
+// }
 
 
 // 已登陸頁面: 新增使用者選單開關功能

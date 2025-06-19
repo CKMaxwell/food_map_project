@@ -1,140 +1,15 @@
-// 初始化地圖，中心點設在台北車站，縮放等級 17
-const map = L.map('map').setView([25.0478, 121.5170], 17);
-
-// const清單
-const baseUrl = new URL('https://north11.onrender.com/api/users/');
-// const baseUrl = new URL('http://localhost:8000/api/users/');
-
-// 加入 OpenStreetMap 圖層
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '地圖資料 © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> 貢獻者'
-  }).addTo(map);
-
-// 
-const selectedTags = new Set();
-
-document.querySelectorAll('.tag').forEach(tag => {
-  tag.addEventListener('click', () => {
-    const value = tag.textContent;
-
-    if (tag.classList.contains('selected')) {
-      tag.classList.remove('selected');
-      selectedTags.delete(value);
-    } else {
-      tag.classList.add('selected');
-      selectedTags.add(value);
-    }
-    // console.log([...selectedTags]); // 可用於API參數
+// 導入共用map
+fetch("./map.html")
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('common-map').innerHTML = html;
+    // 初始化地圖，中心點設在台北車站，縮放等級 17
+    const map = L.map('map').setView([25.0478, 121.5170], 17);
+    // 加入 OpenStreetMap 圖層
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '地圖資料 © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> 貢獻者'
+      }).addTo(map);
   });
-});
-
-
-// 搜尋-彈出搜尋結果
-mainInputBox = document.getElementById("main-search")
-let isComposing = false;
-
-// 搜尋-彈出搜尋結果:開始組字（中文輸入中）
-mainInputBox.addEventListener('compositionstart', () => {
-  isComposing = true;
-});
-
-// 搜尋-彈出搜尋結果:組字結束（輸入確定，例如選字或按空白）
-mainInputBox.addEventListener('compositionend', () => {
-  isComposing = false;
-  updateInputStyle();
-});
-
-// 搜尋-彈出搜尋結果:一般輸入
-mainInputBox.addEventListener('input', () => {
-  if (!isComposing) {
-    updateInputStyle();
-  }
-});
-
-async function updateInputStyle() {
-  const elements = document.getElementsByClassName('search-result');
-
-  if (mainInputBox.value.trim() !== '') {
-    mainInputBox.classList.add('input-filled');
-    const result = await search()
-    const eachResult = document.getElementsByClassName('store-name');
-    for (let i = 0; i <= 4; i++) {
-      eachResult[i].textContent = result[i].name;
-    }
-    for (let el of elements) {
-      el.classList.add('show');
-    }
-    
-  } else {
-    mainInputBox.classList.remove('input-filled');
-    for (let el of elements) {
-      el.classList.remove('show');
-    }
-  }
-}
-
-// 抓取位置
-const searchBox = document.getElementById('search-box');
-const storeInfo = document.getElementById('store-info');
-function updatePosition() {
-  const bottomY = searchBox.getBoundingClientRect().bottom + window.scrollY;
-  storeInfo.style.top = (bottomY + 5) + 'px';
-}
-
-// 顯示
-async function showInfo(index) {
-  const result = await search()
-  
-  const storeInfo = document.getElementById('store-info');
-  const storeName = document.getElementById('info-name');
-  const storeAddress = document.getElementById('info-address');
-  const storePhone = document.getElementById('info-phone');
-  const storeEmail = document.getElementById('info-email');
-  storeName.textContent = result[index]['name']
-  storeAddress.textContent = result[index]['location']
-  storePhone.textContent = result[index]['phone']
-  storeEmail.textContent = result[index]['email']  
-  storeInfo.classList.toggle('show');
-}
-
-// 初始設定一次
-updatePosition();
-
-// 監聽視窗大小改變或滾動
-window.addEventListener('resize', updatePosition);
-window.addEventListener('scroll', updatePosition);
-
-// 監聽 searchBox 自身大小改變
-const observer = new ResizeObserver(updatePosition);
-observer.observe(searchBox);
-
-
-// 路由設定
-function showModal(type) {
-  // closeModal();
-  if (type === 'login') loginModal.classList.add('show');
-  if (type === 'signup') signupModal.classList.add('show');
-}
-
-// 處理返回鍵 (chatGPT建議)
-window.addEventListener('popstate', () => {
-    if (location.pathname === '/#/login') showModal('login');
-    else if (location.pathname === '/#/signup') showModal('signup');
-    else closeModal();
-});
-
-// 頁面剛載入時，根據路由顯示對應 modal (chatGPT建議)
-window.addEventListener('DOMContentLoaded', () => {
-  if (location.pathname === '/#/login') showModal('login');
-  if (location.pathname === '/#/signup') showModal('signup');
-});
-
-// 檢查登入狀態 (這是舊版本 不要用)
-// function isLoggedIn() {
-//   // 以有 token 為例判斷登入狀態
-//   const token = localStorage.getItem('token');
-//   return token && token !== '';
-// }
 
 // 登入畫面
 function showLogin() {
@@ -143,30 +18,6 @@ function showLogin() {
   history.pushState({ modal: 'login' }, '', '/#/login');
   showModal('login');
 }
-// 處理外部路由
-// window.addEventListener("hashchange", () => {
-//   const route = location.hash;
-//   if (route === "/#/login") {
-//     showLogin();
-//   } else if (route === "/#/signup") {
-//     toSignIn();
-//   }
-// });
-function handleRouteChange() {
-  const route = location.hash;
-  if (route === '#/login') {
-    showLogin();
-  }
-  else if (route === '#/signup') {
-    // showLogin();
-    document.getElementById('overlay').classList.add('show');
-    document.getElementById('login-box').classList.add('show');
-    toSignIn();
-  }
-  else closeModal();
-}
-window.addEventListener('hashchange', handleRouteChange);
-window.addEventListener('DOMContentLoaded', handleRouteChange);
 
 function hideLogin() {
   document.getElementById('overlay').classList.remove('show');
@@ -299,38 +150,54 @@ function signUp() {
     });
 }
 
-// 搜尋函數
-async function search() {
-  // 呼叫搜尋api
-  const UrlSearch = new URL('restaurants', baseUrl);
-  try {
-    const res = await fetch(UrlSearch.href, {
-      method: "GET",
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    const data = await res.json();
-    return data.data;
-  } catch(err) {
-    return err;
-  }
+// 路由設定
+function showModal(type) {
+  // closeModal();
+  if (type === 'login') loginModal.classList.add('show');
+  if (type === 'signup') signupModal.classList.add('show');
 }
 
-// 顯示
-function showSelectSetting(item) {
-  if (item == 1) {
-    settingBox = document.getElementById("select-price")
-    settingBox.classList.toggle("show")
-  } else if (item == 2) {
-    settingBox = document.getElementById("select-time")
-    settingBox.classList.toggle("show")
-  } else if (item == 3) {
-    settingBox = document.getElementById("select-distance")
-    settingBox.classList.toggle("show")
-  } else if (item == 4) {
-    settingBox = document.getElementById("select-type")
-    settingBox.classList.toggle("show")
+// 處理返回鍵 (chatGPT建議)
+window.addEventListener('popstate', () => {
+    if (location.pathname === '/#/login') showModal('login');
+    else if (location.pathname === '/#/signup') showModal('signup');
+    else closeModal();
+});
+
+// 頁面剛載入時，根據路由顯示對應 modal (chatGPT建議)
+window.addEventListener('DOMContentLoaded', () => {
+  if (location.pathname === '/#/login') showModal('login');
+  if (location.pathname === '/#/signup') showModal('signup');
+});
+
+// 檢查登入狀態 (這是舊版本 不要用)
+// function isLoggedIn() {
+//   // 以有 token 為例判斷登入狀態
+//   const token = localStorage.getItem('token');
+//   return token && token !== '';
+// }
+
+// 處理外部路由
+// window.addEventListener("hashchange", () => {
+//   const route = location.hash;
+//   if (route === "/#/login") {
+//     showLogin();
+//   } else if (route === "/#/signup") {
+//     toSignIn();
+//   }
+// });
+function handleRouteChange() {
+  const route = location.hash;
+  if (route === '#/login') {
+    showLogin();
   }
-  
+  else if (route === '#/signup') {
+    // showLogin();
+    document.getElementById('overlay').classList.add('show');
+    document.getElementById('login-box').classList.add('show');
+    toSignIn();
+  }
+  else closeModal();
 }
+window.addEventListener('hashchange', handleRouteChange);
+window.addEventListener('DOMContentLoaded', handleRouteChange);
