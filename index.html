@@ -13,13 +13,16 @@
     <div id="common-map"></div>
 
     <!-- 使用者資料 - 未登入 -->
-    <div id="user-box-default">
-        <div class="row-flex">
-            <img src="image/home.png" id="home-image">
-            <h1 id="home-txt">私房美食地圖</h1>
-            <button onclick="showLogin()" id="login-btn">登入</button>
+    <div class="wrapper">
+        <div id="user-box-default">
+            <div class="row-flex">
+                <img src="image/home.png" id="home-image">
+                <h1 id="home-txt">私房美食地圖</h1>
+                <button onclick="showLogin()" id="login-btn">登入</button>
+            </div>
         </div>
     </div>
+    
     <!-- 登入&註冊畫面+遮罩 -->
     <div id="overlay" class="overlay">
         <!-- 登入畫面 -->
@@ -72,7 +75,13 @@
         </div>
     </div>
     <!-- 完成註冊通知 -->
-     <div class="alert"></div>
+    <div id="signup-alert" class="overlay">
+        <div class="alert-content">
+            <P>您已完成註冊</P>
+            <p>請再次登入您的帳號</p>
+            <button onclick="closeAlert()">關閉</button>
+        </div>
+    </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="js/config.js"></script>

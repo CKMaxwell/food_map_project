@@ -87,54 +87,54 @@ function showSelectSetting(item) {
 
 // 呼叫區
 function init() {
-// 進階搜尋的篩選標籤(建議改成toggle)
-const selectedTags = new Set();
+  // 進階搜尋的篩選標籤(建議改成toggle)
+  const selectedTags = new Set();
 
-document.querySelectorAll('.tag').forEach(tag => {
-  tag.addEventListener('click', () => {
-    const value = tag.textContent;
+  document.querySelectorAll('.tag').forEach(tag => {
+    tag.addEventListener('click', () => {
+      const value = tag.textContent;
 
-    if (tag.classList.contains('selected')) {
-      tag.classList.remove('selected');
-      selectedTags.delete(value);
-    } else {
-      tag.classList.add('selected');
-      selectedTags.add(value);
-    }
-    // console.log([...selectedTags]); // 可用於API參數
+      if (tag.classList.contains('selected')) {
+        tag.classList.remove('selected');
+        selectedTags.delete(value);
+      } else {
+        tag.classList.add('selected');
+        selectedTags.add(value);
+      }
+      // console.log([...selectedTags]); // 可用於API參數
+    });
   });
-});
 
-//// 搜尋欄相關函數
-// 搜尋-彈出搜尋結果
-mainInputBox = document.getElementById("main-search")
-let isComposing = false;
+  //// 搜尋欄相關函數
+  // 搜尋-彈出搜尋結果
+  mainInputBox = document.getElementById("main-search")
+  let isComposing = false;
 
-// 搜尋-彈出搜尋結果:開始組字（中文輸入中）
-mainInputBox.addEventListener('compositionstart', () => {
-  isComposing = true;
-});
+  // 搜尋-彈出搜尋結果:開始組字（中文輸入中）
+  mainInputBox.addEventListener('compositionstart', () => {
+    isComposing = true;
+  });
 
-// 搜尋-彈出搜尋結果:組字結束（輸入確定，例如選字或按空白）
-mainInputBox.addEventListener('compositionend', () => {
-  isComposing = false;
-  updateInputStyle();
-});
-
-// 搜尋-彈出搜尋結果:一般輸入
-mainInputBox.addEventListener('input', () => {
-  if (!isComposing) {
+  // 搜尋-彈出搜尋結果:組字結束（輸入確定，例如選字或按空白）
+  mainInputBox.addEventListener('compositionend', () => {
+    isComposing = false;
     updateInputStyle();
-  }
-});
+  });
 
-// 抓取位置
-const searchBox = document.getElementById('search-box');
-const storeInfo = document.getElementById('store-info');
-function updatePosition() {
-  const bottomY = searchBox.getBoundingClientRect().bottom + window.scrollY;
-  storeInfo.style.top = (bottomY + 5) + 'px';
-}
+  // 搜尋-彈出搜尋結果:一般輸入
+  mainInputBox.addEventListener('input', () => {
+    if (!isComposing) {
+      updateInputStyle();
+    }
+  });
+
+  // 抓取位置
+  const searchBox = document.getElementById('search-box');
+  const storeInfo = document.getElementById('store-info');
+  function updatePosition() {
+    const bottomY = searchBox.getBoundingClientRect().bottom + window.scrollY;
+    storeInfo.style.top = (bottomY + 5) + 'px';
+  }
 
   // 初始設定元件位置
   updatePosition();

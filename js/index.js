@@ -126,7 +126,8 @@ function signUp() {
     body: JSON.stringify({
       "name": userName.value,
       "email": email.value,
-      "password": password.value
+      "password": password.value,
+      "role": 'store'
     })
   })
     .then(response => response.json())
@@ -136,6 +137,7 @@ function signUp() {
         document.getElementById('overlay').classList.remove('show');
         document.getElementById("login-box").style.display = "block"; //恢復原狀
         document.getElementById("signup-box").style.display = "none";
+        document.getElementById('signup-alert').classList.add('show')
       }
       else if (data.status != 'success') {
         throw new Error(data.message || '登入失敗');
@@ -148,6 +150,10 @@ function signUp() {
         errorTxt.textContent = "";
       }, 3000)
     });
+}
+
+function closeAlert() {
+  document.getElementById('signup-alert').classList.remove('show')
 }
 
 // 路由設定

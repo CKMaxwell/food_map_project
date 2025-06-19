@@ -20,6 +20,10 @@ body {
     gap: 8px;
 }
 
+.wrapper {
+    /* 啟用 container query */
+    container-type: inline-size; 
+}
 #user-box-default {
     /* display: none; */
     position: absolute;
@@ -30,6 +34,13 @@ body {
     background: rgba(255, 255, 255, 0.8);
     z-index: 500;
     padding: 10px;
+}
+
+/* 當 wrapper 寬度 < 700px 時隱藏段落 */
+@container (max-width: 700px) {
+  #user-box-default h1, img {
+    display: none;
+  }
 }
 
 #user-box-login {
@@ -241,11 +252,25 @@ button {
 }
 
 #signup-input > * {
-  margin-top: 8px;
-  margin-bottom: 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 .error-text {
     color: #db2222;
     font-size: 12px;
+}
+
+/* alert 設定 */
+.alert-content {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  color: #333;
+  text-align: center;
+  width: 80%;
+  max-width: 200px;
+}
+.alert-content button{
+    margin: 10px 0px 0px 0px;
 }
