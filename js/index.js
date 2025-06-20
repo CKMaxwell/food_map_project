@@ -156,6 +156,20 @@ function closeAlert() {
   document.getElementById('signup-alert').classList.remove('show')
 }
 
+function checkSignupWidth() {
+  const parentWidth = document.getElementById('signup-box').parentElement.offsetWidth;
+  const signupFig = document.getElementById('signup-fig');
+  const signupInput = document.getElementById('signup-input');
+  // 父元素overlay小於指定px 就把signupFig隱藏
+  if (parentWidth < 900) {
+    signupFig.style.display = 'none';
+    signupInput.style.width = '100%'
+  } else {
+    signupFig.style.display = 'flex'
+    signupInput.style.width = '40%'
+  }
+}
+
 // 路由設定
 function showModal(type) {
   // closeModal();
@@ -207,3 +221,4 @@ function handleRouteChange() {
 }
 window.addEventListener('hashchange', handleRouteChange);
 window.addEventListener('DOMContentLoaded', handleRouteChange);
+window.addEventListener('resize', checkSignupWidth);
