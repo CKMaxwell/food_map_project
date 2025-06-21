@@ -53,7 +53,11 @@ function logOut() {
 // 已登陸頁面: 新增使用者選單開關功能
 document.getElementById('user-btn').addEventListener('click', () => {
   const menu = document.getElementById('user-menu');
+  const setting = document.getElementById("setting");
+  const dashboard = document.getElementById("dashboard");
   menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+  setting.style.display = 'none';
+  dashboard.style.display = 'none';
 });
 
 // 控制分頁切換
@@ -79,18 +83,26 @@ function showSetting() {
   const setting = document.getElementById("setting");
   const dashboard = document.getElementById("dashboard");
   const menu = document.getElementById('user-menu');
+  const ShowButton = document.querySelector('button.tab-button[data-tab="user_tab1"]');
+  const ShowContent = document.getElementById('user_tab1');
   setting.style.display = setting.style.display === 'flex' ? 'none' : 'flex'
   dashboard.style.display = 'none';
   menu.style.display = 'none';
+  ShowButton.classList.add('active');
+  ShowContent.classList.add('active');
 }
 // 設定-店家儀錶板內容
 function showDasboard() {
   const setting = document.getElementById("setting");
   const dashboard = document.getElementById("dashboard");
   const menu = document.getElementById('user-menu');
+  const ShowButton = document.querySelector('button.tab-button[data-tab="owner_tab1"]');
+  const ShowContent = document.getElementById('owner_tab1');
   dashboard.style.display = dashboard.style.display === 'flex' ? 'none' : 'flex'
   setting.style.display = 'none';
   menu.style.display = 'none';
+  ShowButton.classList.add('active');
+  ShowContent.classList.add('active');
 }
 
 async function checkAuth() {
@@ -183,20 +195,28 @@ async function updateUserData() {
         "region": selectedLanguage.value,
         "phonenumber": newPhone.value
       })
-  });
+  })
   const data = await res.json();
-  userName = document.getElementsByClassName('txt-name')
-  for (let i = 0; i < userName.length; i++) {
-    userName[i].textContent = data['data']['user']['name']
+  if (data.status === 'success') {
+    userName = document.getElementsByClassName('txt-name')
+    for (let i = 0; i < userName.length; i++) {
+      userName[i].textContent = data['data']['user']['name']
+    }
+    userPhone = document.getElementsByClassName('txt-phone')
+    for (let i = 0; i < userPhone.length; i++) {
+      userPhone[i].textContent = data['data']['user']['phonenumber']
+    }
+    userLanguage = document.getElementsByClassName('txt-language')
+    for (let i = 0; i < userLanguage.length; i++) {
+      userLanguage[i].textContent = data['data']['user']['region']
+    }
+    document.getElementById('changeInfo-alert').classList.add('show')
+    hideUpdateDiv()
   }
-  userPhone = document.getElementsByClassName('txt-phone')
-  for (let i = 0; i < userPhone.length; i++) {
-    userPhone[i].textContent = data['data']['user']['phonenumber']
-  }
-  userLanguage = document.getElementsByClassName('txt-language')
-  for (let i = 0; i < userLanguage.length; i++) {
-    userLanguage[i].textContent = data['data']['user']['region']
-  }
+}
+
+function closeAlert() {
+  document.getElementById('changeInfo-alert').classList.remove('show')
 }
 
 //// 載入頁面

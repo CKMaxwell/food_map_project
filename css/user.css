@@ -293,7 +293,7 @@ button {
     flex: 1;
 }
 
-.store-name {
+.store-name-owner {
     font-size: 18px;
     font-weight: bold;
 }
@@ -391,4 +391,18 @@ button {
 #UpdateData button {
     display: block;
     width: 100%;
+}
+
+/* alert 設定 */
+.alert-content {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  color: #333;
+  text-align: center;
+  width: 80%;
+  max-width: 200px;
+}
+.alert-content button{
+    margin: 10px 0px 0px 0px;
 }
