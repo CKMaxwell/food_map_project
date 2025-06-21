@@ -64,7 +64,7 @@ function login() {
         localStorage.setItem('token', token);
         checkAuth();
         // 導向另一個靜態頁面
-        window.location.href = './shop_user.html';
+        window.location.href = './user.html';
       }
       else if (data.status != 'success') {
         // 這裡手動拋出錯誤，把錯誤訊息一起拋出

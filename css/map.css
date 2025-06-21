@@ -16,7 +16,7 @@
     z-index: 500;
 }
 
-.custom-select {
+#custom-select {
     background-color: #ffffff;
     width: 40%;
     display: flex;
@@ -26,7 +26,7 @@
     /* overflow: hidden */
 }
   
-.custom-select .icon {
+#custom-select .icon {
     width: 40px;
     height: 40px;
     /* 使用 object-fit: cover; 自動裁切，即可不用處理radius*/
@@ -43,7 +43,7 @@
     color: #2E2E2E;
   }
 
-.custom-select select {
+#custom-select select {
     width: 100%;
     border: none;
     object-fit: cover;

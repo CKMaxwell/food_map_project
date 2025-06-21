@@ -1,118 +1,118 @@
 <div id="search-box">
-        <div class="row row-flex">
-            <div class="custom-select">
-                <img src="./image/selection_icon_white.png" class="icon">
-                <select id="station-selection">
-                    <option value="taipei">台北車站</option>
-                    <option value="banqiao">板橋車站</option>
-                    <option value="taichung">台中車站</option>
-                </select>
-            </div>
-            <h2><span class="nearby-label">車站周邊美食</span></h2>
+    <div class="row row-flex">
+        <div id="custom-select">
+            <img src="./image/selection_icon_white.png" class="icon">
+            <select id="station-selection">
+                <option value="taipei">台北車站</option>
+                <option value="banqiao">板橋車站</option>
+                <option value="taichung">台中車站</option>
+            </select>
         </div>
+        <h2 id="search-mainTxt"><span class="nearby-label">車站周邊美食</span></h2>
+    </div>
+    <div class="row">
+        <input id="main-search" type="text" placeholder="搜尋店家" />
+        <div class="search-result">
+            <div class="search-result-item row-flex" data-index="0" onclick="showInfo(0)">
+                <img src="./image/restaurant_icon.png">
+                <p class="store-name">假咖啡廳01</p>
+            </div>
+            <div class="search-result-item row-flex" data-index="1" onclick="showInfo(1)">
+                <img src="./image/restaurant_icon.png">
+                <p class="store-name">假咖啡廳01</p>
+            </div>
+            <div class="search-result-item row-flex" data-index="2" onclick="showInfo(2)">
+                <img src="./image/restaurant_icon.png">
+                <p class="store-name">假咖啡廳01</p>
+            </div>
+            <div class="search-result-item row-flex" data-index="3" onclick="showInfo(3)">
+                <img src="./image/restaurant_icon.png">
+                <p class="store-name">假咖啡廳01</p>
+            </div>
+            <div class="search-result-item row-flex" data-index="4" onclick="showInfo(4)">
+                <img src="./image/restaurant_icon.png">
+                <p class="store-name">假咖啡廳01</p>
+            </div>
+        </div>
+    </div>
+    <div class="row tag-container">
+        <span class="tag" onclick="showSelectSetting(1)">價格範圍</span>
+        <span class="tag" onclick="showSelectSetting(2)">營業時間</span>
+        <span class="tag" onclick="showSelectSetting(3)">與車站距離</span>
+        <span class="tag" onclick="showSelectSetting(4)">餐廳類型</span>
+    </div>
+    <div id="select-price">
+        <span>$0 ~ ~100000</span>
+        <input type="range" min="0" max="50000">
         <div class="row">
-            <input id="main-search" type="text" placeholder="搜尋店家" />
-            <div class="search-result">
-                <div class="search-result-item row-flex" data-index="0" onclick="showInfo(0)">
-                    <img src="./image/restaurant_icon.png">
-                    <p class="store-name">假咖啡廳01</p>
-                </div>
-                <div class="search-result-item row-flex" data-index="1" onclick="showInfo(1)">
-                    <img src="./image/restaurant_icon.png">
-                    <p class="store-name">假咖啡廳01</p>
-                </div>
-                <div class="search-result-item row-flex" data-index="2" onclick="showInfo(2)">
-                    <img src="./image/restaurant_icon.png">
-                    <p class="store-name">假咖啡廳01</p>
-                </div>
-                <div class="search-result-item row-flex" data-index="3" onclick="showInfo(3)">
-                    <img src="./image/restaurant_icon.png">
-                    <p class="store-name">假咖啡廳01</p>
-                </div>
-                <div class="search-result-item row-flex" data-index="4" onclick="showInfo(4)">
-                    <img src="./image/restaurant_icon.png">
-                    <p class="store-name">假咖啡廳01</p>
-                </div>
-            </div>
-        </div>
-        <div class="row tag-container">
-            <span class="tag" onclick="showSelectSetting(1)">價格範圍</span>
-            <span class="tag" onclick="showSelectSetting(2)">營業時間</span>
-            <span class="tag" onclick="showSelectSetting(3)">與車站距離</span>
-            <span class="tag" onclick="showSelectSetting(4)">餐廳類型</span>
-        </div>
-        <div id="select-price">
-            <span>$0 ~ ~100000</span>
-            <input type="range" min="0" max="50000">
-            <div class="row">
-                <button>恢復預設</button>
-                <button>完成</button>
-            </div>
-        </div>
-        <div id="select-time">
-            <form>
-                <label><input type="checkbox" name="category" value="00:00-08:00">00:00-08:00</label><br>
-                <label><input type="checkbox" name="category" value="08:00-12:00">08:00-12:00</label><br>
-                <label><input type="checkbox" name="category" value="12:00-18:00">12:00-18:00</label><br>
-                <label><input type="checkbox" name="category" value="18:00-24:00">18:00-24:00</label><br>
-            </form>
-            <div class="row">
-                <button>恢復預設</button>
-                <button>完成</button>
-            </div>
-        </div>
-        <div id="select-distance">
-            <form>
-                <label><input type="checkbox" name="category" value="100公尺以內"> 100公尺以內</label><br>
-                <label><input type="checkbox" name="category" value="101-300公尺"> 101-300公尺</label><br>
-                <label><input type="checkbox" name="category" value="301-500公尺"> 301-500公尺</label><br>
-                <label><input type="checkbox" name="category" value="501-1000公尺"> 501-1000公尺</label><br>
-                <label><input type="checkbox" name="category" value="一公里以上"> 一公里以上</label><br>
-            </form>
-            <div class="row">
-                <button>恢復預設</button>
-                <button>完成</button>
-            </div>
-        </div>
-        <div id="select-type">
-            <form>
-                <label><input type="checkbox" name="category" value="中式"> 中式</label><br>
-                <label><input type="checkbox" name="category" value="日式"> 日式</label><br>
-                <label><input type="checkbox" name="category" value="韓式"> 韓式</label><br>
-                <label><input type="checkbox" name="category" value="義式"> 義式</label><br>
-            </form>
-            <div class="row">
-                <button>恢復預設</button>
-                <button>完成</button>
-            </div>
+            <button>恢復預設</button>
+            <button>完成</button>
         </div>
     </div>
-    <!-- 店家資訊 -->
-    <div id="store-info" class="store-info">
-        <img src="./image/fake_coffe.jpg">
-        <div class="info row-flex">
-            <p id="info-name">假咖啡廳</p>
-        </div>
-        <div class="info row-flex">
-            <img src="./image/icon_star.png">4.8
-        </div>
-        <div class="info row-flex">
-            <img src="./image/icon_map.png">
-            <p id="info-address">大馬路85號</p>
-        </div>
-        <div class="info row-flex">
-            <img src="./image/icon_phone.png">
-            <p id="info-phone">0800-000-001</p>
-        </div>
-        <div class="info row-flex">
-            <img src="./image/icon_menu.png">
-            <p>菜單</p>
-        </div>
-        <div class="info row-flex">
-            <img src="./image/icon_email.png">
-            <p id="info-email">coffee@gmail.com</p>
+    <div id="select-time">
+        <form>
+            <label><input type="checkbox" name="category" value="00:00-08:00">00:00-08:00</label><br>
+            <label><input type="checkbox" name="category" value="08:00-12:00">08:00-12:00</label><br>
+            <label><input type="checkbox" name="category" value="12:00-18:00">12:00-18:00</label><br>
+            <label><input type="checkbox" name="category" value="18:00-24:00">18:00-24:00</label><br>
+        </form>
+        <div class="row">
+            <button>恢復預設</button>
+            <button>完成</button>
         </div>
     </div>
+    <div id="select-distance">
+        <form>
+            <label><input type="checkbox" name="category" value="100公尺以內"> 100公尺以內</label><br>
+            <label><input type="checkbox" name="category" value="101-300公尺"> 101-300公尺</label><br>
+            <label><input type="checkbox" name="category" value="301-500公尺"> 301-500公尺</label><br>
+            <label><input type="checkbox" name="category" value="501-1000公尺"> 501-1000公尺</label><br>
+            <label><input type="checkbox" name="category" value="一公里以上"> 一公里以上</label><br>
+        </form>
+        <div class="row">
+            <button>恢復預設</button>
+            <button>完成</button>
+        </div>
+    </div>
+    <div id="select-type">
+        <form>
+            <label><input type="checkbox" name="category" value="中式"> 中式</label><br>
+            <label><input type="checkbox" name="category" value="日式"> 日式</label><br>
+            <label><input type="checkbox" name="category" value="韓式"> 韓式</label><br>
+            <label><input type="checkbox" name="category" value="義式"> 義式</label><br>
+        </form>
+        <div class="row">
+            <button>恢復預設</button>
+            <button>完成</button>
+        </div>
+    </div>
+</div>
+<!-- 店家資訊 -->
+<div id="store-info" class="store-info">
+    <img src="./image/fake_coffe.jpg">
+    <div class="info row-flex">
+        <p id="info-name">假咖啡廳</p>
+    </div>
+    <div class="info row-flex">
+        <img src="./image/icon_star.png">4.8
+    </div>
+    <div class="info row-flex">
+        <img src="./image/icon_map.png">
+        <p id="info-address">大馬路85號</p>
+    </div>
+    <div class="info row-flex">
+        <img src="./image/icon_phone.png">
+        <p id="info-phone">0800-000-001</p>
+    </div>
+    <div class="info row-flex">
+        <img src="./image/icon_menu.png">
+        <p>菜單</p>
+    </div>
+    <div class="info row-flex">
+        <img src="./image/icon_email.png">
+        <p id="info-email">coffee@gmail.com</p>
+    </div>
+</div>
 
-    <!-- 地圖 -->
-    <div id="map"></div>
+<!-- 地圖 -->
+<div id="map"></div>

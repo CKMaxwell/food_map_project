@@ -44,6 +44,19 @@ body {
     cursor: pointer;
 }
 
+.wrapper {
+    /* 啟用 container query */
+    container-type: inline-size; 
+}
+
+
+/* 當 wrapper 寬度 < 700px 時隱藏段落 */
+@container (max-width: 700px) {
+  #user-box-login>.row-flex>h1, img {
+    display: none;
+  }
+}
+
 #user-box-login {
     display: block;
     position: absolute;

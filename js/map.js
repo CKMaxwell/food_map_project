@@ -84,7 +84,6 @@ function showSelectSetting(item) {
   }
 }
 
-
 // 呼叫區
 function init() {
   // 進階搜尋的篩選標籤(建議改成toggle)
@@ -136,12 +135,28 @@ function init() {
     storeInfo.style.top = (bottomY + 5) + 'px';
   }
 
+  function checkSearchWidth() {
+    const parentWidth = document.getElementById('search-box').parentElement.offsetWidth;
+    const searchTxt = document.getElementById('search-mainTxt');
+    const customSelect = document.getElementById('custom-select');
+    // 父元素overlay小於指定px 就把signupFig隱藏
+    if (parentWidth < 900) {
+      searchTxt.style.display = 'none';
+      customSelect.style.width = '80%';
+    } else {
+      searchTxt.style.display = 'block';
+      customSelect.style.width = '40%';
+    }
+  }
+
   // 初始設定元件位置
   updatePosition();
+  checkSearchWidth();
 
   // 監聽視窗大小改變或滾動
   window.addEventListener('resize', updatePosition);
   window.addEventListener('scroll', updatePosition);
+  window.addEventListener('resize', checkSearchWidth);
 
   // 監聽 searchBox 自身大小改變
   const observer = new ResizeObserver(updatePosition);
