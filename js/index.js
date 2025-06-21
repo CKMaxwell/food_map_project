@@ -115,6 +115,8 @@ function signUp() {
   const email = document.getElementById('signup-email');
   const password = document.getElementById('signup-password');
   const errorTxt = document.getElementById('error-text-signup');
+  const roleBox = document.querySelector('span.signUpTag.selected')
+  const role = roleBox.dataset.role;
   // 呼叫註冊api
   const UrlSignUp = new URL('sign-up', baseUrl);
   console.log(UrlSignUp.href)
@@ -127,7 +129,7 @@ function signUp() {
       "name": userName.value,
       "email": email.value,
       "password": password.value,
-      "role": 'store'
+      "role": role
     })
   })
     .then(response => response.json())
@@ -222,3 +224,12 @@ function handleRouteChange() {
 window.addEventListener('hashchange', handleRouteChange);
 window.addEventListener('DOMContentLoaded', handleRouteChange);
 window.addEventListener('resize', checkSignupWidth);
+
+document.querySelectorAll('.signUpTag').forEach(tag =>{
+  tag.addEventListener('click', ()=>{
+    document.querySelectorAll('.signUpTag').forEach(t=>{
+      t.classList.remove('selected')
+    });
+    tag.classList.add('selected');
+  })
+})

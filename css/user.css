@@ -134,6 +134,10 @@ button {
     /* height: 10px; */
 }
 
+#menu-dashboard{
+    display: none; /* 預設隱藏 */
+}
+
 #dashboard {
     margin-top: 10px;
     display: none; /* 預設隱藏 */
@@ -141,6 +145,8 @@ button {
     background-color: #ffffff;
     /* width: 10px; */
     /* height: 10px; */
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
 #dashboard-main {

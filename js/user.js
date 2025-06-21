@@ -92,7 +92,7 @@ function showSetting() {
   ShowContent.classList.add('active');
 }
 // 設定-店家儀錶板內容
-function showDasboard() {
+function showDashboard() {
   const setting = document.getElementById("setting");
   const dashboard = document.getElementById("dashboard");
   const menu = document.getElementById('user-menu');
@@ -149,6 +149,14 @@ async function getUserData() {
       }
   });
   const data = await res.json();
+  // 區分不同會員的顯示畫面
+  let userRow = data['data']['user']['role']
+  console.log(userRow)
+  if (userRow.toLowerCase() === 'store') {
+    // document.getElementById('dashboard').style.display = 'none'
+    document.getElementById('menu-dashboard').style.display = 'block'
+  }
+  // 更新使用者欄位數據
   userName = document.getElementsByClassName('txt-name')
   for (let i = 0; i < userName.length; i++) {
     userName[i].textContent = data['data']['user']['name']

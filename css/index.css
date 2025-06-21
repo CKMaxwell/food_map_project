@@ -261,6 +261,30 @@ button {
     font-size: 12px;
 }
 
+#selectRow{
+    margin: 10px 0px;
+    /* padding: 5px; */
+}
+
+.signUpTag{
+    width: 100%;
+    /* padding: 5px */
+    background-color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 5px;
+    border-color: #000000;
+    font-size: 14px;
+    cursor: pointer;
+    /* white-space: nowrap; */
+    transition: all 0.2s;
+}
+
+.signUpTag.selected {
+    background-color: #db2222;
+    color: white;
+    border-color: #db2222;
+}
+
 /* alert 設定 */
 .alert-content {
   background: white;
