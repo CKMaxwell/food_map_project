@@ -1,17 +1,29 @@
 async function updateInputStyle() {
   const elements = document.getElementsByClassName('search-result');
-
+  // 用於在搜尋過程中，持續關閉店家資訊
+  const storeInfo = document.getElementById('store-info');
   if (mainInputBox.value.trim() !== '') {
     mainInputBox.classList.add('input-filled');
-    const result = await search()
-    const eachResult = document.getElementsByClassName('store-name');
-    for (let i = 0; i <= 4; i++) {
-      eachResult[i].textContent = result[i].name;
+    let searchKeyWord = mainInputBox.value.trim();
+    // 只有在search api success時，才顯示結果
+    try {
+      storeInfo.classList.remove('show')
+      const result = await search(searchKeyWord)
+      const eachResult = document.getElementsByClassName('store-name');
+      for (let i = 0; i <= 4; i++) {
+        eachResult[i].textContent = result[i].name;
+      }
+      for (let el of elements) {
+        el.classList.add('show');
+      }
+    } catch (err) {
+      // 用於處理沒有搜尋到結果
+      console.log(err);
+      mainInputBox.classList.remove('input-filled');
+      for (let el of elements) {
+        el.classList.remove('show');
+      }
     }
-    for (let el of elements) {
-      el.classList.add('show');
-    }
-    
   } else {
     mainInputBox.classList.remove('input-filled');
     for (let el of elements) {
@@ -22,7 +34,8 @@ async function updateInputStyle() {
 
 // 顯示店家詳細圖卡
 async function showInfo(index) {
-  const result = await search()
+  let searchKeyWord = mainInputBox.value.trim();
+  const result = await search(searchKeyWord)
   
   const storeInfo = document.getElementById('store-info');
   const storeName = document.getElementById('info-name');
@@ -30,16 +43,28 @@ async function showInfo(index) {
   const storePhone = document.getElementById('info-phone');
   const storeEmail = document.getElementById('info-email');
   storeName.textContent = result[index]['name']
-  storeAddress.textContent = result[index]['location']
+  storeAddress.textContent = result[index]['location']['address']
   storePhone.textContent = result[index]['phone']
-  storeEmail.textContent = result[index]['email']  
-  storeInfo.classList.toggle('show');
+  storeEmail.textContent = result[index]['email']
+  
+  if (state.storeShowIndex !== index) {
+    storeInfo.classList.add('show');
+    state.storeShowIndex = index;
+  } else if (state.storeShowIndex === index) {
+    storeInfo.classList.toggle('show');
+  }
 }
 
+// 顯示店家詳細資料的index物件
+const state = {
+  storeShowIndex: 0
+};
+
 // 搜尋函數
-async function search() {
+async function search(keyword) {
   // 呼叫搜尋api
-  const UrlSearch = new URL('restaurants', baseUrl);
+  const UrlSearch = new URL('search', baseStoreUrl);
+  UrlSearch.searchParams.append('q', keyword);  // 加上 ?q=xxx
   try {
     const res = await fetch(UrlSearch.href, {
       method: "GET",
@@ -48,6 +73,7 @@ async function search() {
       }
     })
     const data = await res.json();
+    // console.log(data);
     return data.data;
   } catch(err) {
     return err;
@@ -61,31 +87,52 @@ function showSelectSetting(item) {
   settingBoxTime = document.getElementById("select-time")
   settingBoxDistance = document.getElementById("select-distance")
   settingBoxType = document.getElementById("select-type")
+  // 用於在進階搜尋時，關閉店家資訊的顯示
+  const storeInfo = document.getElementById('store-info');
+  // 用於在進階搜尋時，關閉搜尋的顯示
+  const elements = document.getElementsByClassName('search-result');
   if (item == 1) {
     settingBoxPrice.classList.toggle("show")
     settingBoxTime.classList.remove("show")
     settingBoxDistance.classList.remove("show")
     settingBoxType.classList.remove("show")
+    storeInfo.classList.remove('show');
+    for (let el of elements) {
+      el.classList.remove('show')
+    }
   } else if (item == 2) {
     settingBoxTime.classList.toggle("show")
     settingBoxPrice.classList.remove("show")
     settingBoxDistance.classList.remove("show")
     settingBoxType.classList.remove("show")
+    storeInfo.classList.remove('show');
+    for (let el of elements) {
+      el.classList.remove('show')
+    }
   } else if (item == 3) {
     settingBoxDistance.classList.toggle("show")
     settingBoxPrice.classList.remove("show")
     settingBoxTime.classList.remove("show")
     settingBoxType.classList.remove("show")
+    storeInfo.classList.remove('show');
+    for (let el of elements) {
+      el.classList.remove('show')
+    }
   } else if (item == 4) {
     settingBoxType.classList.toggle("show")
     settingBoxPrice.classList.remove("show")
     settingBoxTime.classList.remove("show")
     settingBoxDistance.classList.remove("show")
+    storeInfo.classList.remove('show');
+    for (let el of elements) {
+      el.classList.remove('show')
+    }
   }
 }
 
 // 呼叫區
 function init() {
+  state.storeShowIndex = 0;
   // 進階搜尋的篩選標籤(建議改成toggle)
   const selectedTags = new Set();
 
