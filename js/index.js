@@ -3,12 +3,12 @@ fetch("./map.html")
   .then(res => res.text())
   .then(html => {
     document.getElementById('common-map').innerHTML = html;
-    // 初始化地圖，中心點設在台北車站，縮放等級 17
-    const map = L.map('map').setView([25.0478, 121.5170], 17);
-    // 加入 OpenStreetMap 圖層
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '地圖資料 © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> 貢獻者'
-      }).addTo(map);
+    // // 初始化地圖，中心點設在台北車站，縮放等級 17
+    // let map = L.map('map').setView([25.0478, 121.5170], 17);
+    // // 加入 OpenStreetMap 圖層
+    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //     attribution: '地圖資料 © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> 貢獻者'
+    //   }).addTo(map);
   });
 
 // 登入畫面

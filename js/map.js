@@ -2,6 +2,7 @@ async function updateInputStyle() {
   const elements = document.getElementsByClassName('search-result');
   // 用於在搜尋過程中，持續關閉店家資訊
   const storeInfo = document.getElementById('store-info');
+  const mainInputBox = document.getElementById("main-search")
   if (mainInputBox.value.trim() !== '') {
     mainInputBox.classList.add('input-filled');
     let searchKeyWord = mainInputBox.value.trim();
@@ -18,7 +19,7 @@ async function updateInputStyle() {
       }
     } catch (err) {
       // 用於處理沒有搜尋到結果
-      console.log(err);
+      // console.log(err);
       mainInputBox.classList.remove('input-filled');
       for (let el of elements) {
         el.classList.remove('show');
@@ -34,6 +35,7 @@ async function updateInputStyle() {
 
 // 顯示店家詳細圖卡
 async function showInfo(index) {
+  const mainInputBox = document.getElementById("main-search")
   let searchKeyWord = mainInputBox.value.trim();
   const result = await search(searchKeyWord)
   
@@ -46,7 +48,11 @@ async function showInfo(index) {
   storeAddress.textContent = result[index]['location']['address']
   storePhone.textContent = result[index]['phone']
   storeEmail.textContent = result[index]['email']
-  
+  // console.log(result[index]['location']['lat'])
+  const longitude = result[index]['location']['lat']
+  const latitude = result[index]['location']['lng']
+  // console.log(longitude, latitude)
+  showMapInfoIcon(storeName, longitude, latitude)
   if (state.storeShowIndex !== index) {
     storeInfo.classList.add('show');
     state.storeShowIndex = index;
@@ -58,6 +64,26 @@ async function showInfo(index) {
 // 顯示店家詳細資料的index物件
 const state = {
   storeShowIndex: 0
+};
+
+// 移動地圖位置&顯示icon
+function showMapInfoIcon(name, longitude, latitude) {
+  //建立自訂 icon
+  var myIcon = L.icon({
+    iconUrl: './image/map_loc.png', // 你也可以用自己的圖片
+    iconSize: [40, 40],  // 圖示大小
+    iconAnchor: [16, 32],  // 對齊座標點的圖示位置（左上角為0,0）
+    popupAnchor: [0, -32]  // 提示窗位置
+  });
+  // 先移除舊maker
+  if (marker) {
+    marker.remove()
+  }
+  //加入 icon 到指定位置
+  marker = L.marker([longitude, latitude], { icon: myIcon })
+    .addTo(map)
+    .bindPopup(name);
+  map.setView([longitude+0.001, latitude-0.002], 17);
 };
 
 // 搜尋函數
@@ -153,7 +179,7 @@ function init() {
 
   //// 搜尋欄相關函數
   // 搜尋-彈出搜尋結果
-  mainInputBox = document.getElementById("main-search")
+  const mainInputBox = document.getElementById("main-search")
   let isComposing = false;
 
   // 搜尋-彈出搜尋結果:開始組字（中文輸入中）
@@ -208,6 +234,15 @@ function init() {
   // 監聽 searchBox 自身大小改變
   const observer = new ResizeObserver(updatePosition);
   observer.observe(searchBox);
+
+  // 初始化地圖，中心點設在台北車站，縮放等級 17
+  map = L.map('map').setView([25.0478, 121.5170], 17);
+  // 加入 OpenStreetMap 圖層
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '地圖資料 © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> 貢獻者'
+    }).addTo(map);
 }
 
+let map;
+let marker;
 window.addEventListener('load', init); // 確保 DOM 渲染完成後才執行
