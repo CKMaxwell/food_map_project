@@ -1,4 +1,6 @@
 // 導入共用map
+import { init } from './map.js';
+
 fetch("./map.html")
   .then(res => res.text())
   .then(html => {
@@ -9,6 +11,7 @@ fetch("./map.html")
     // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     //     attribution: '地圖資料 © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> 貢獻者'
     //   }).addTo(map);
+    init();
   });
 
 

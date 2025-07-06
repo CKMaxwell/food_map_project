@@ -157,7 +157,7 @@ function showSelectSetting(item) {
 }
 
 // 呼叫區
-function init() {
+export function init() {
   state.storeShowIndex = 0;
   // 進階搜尋的篩選標籤(建議改成toggle)
   const selectedTags = new Set();
@@ -245,4 +245,5 @@ function init() {
 
 let map;
 let marker;
-window.addEventListener('load', init); // 確保 DOM 渲染完成後才執行
+// window.addEventListener('load', init); 
+// 確保 DOM 渲染完成後才執行
