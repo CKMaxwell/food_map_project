@@ -38,7 +38,7 @@ async function showInfo(index) {
   const mainInputBox = document.getElementById("main-search")
   let searchKeyWord = mainInputBox.value.trim();
   const result = await search(searchKeyWord)
-  
+  localStorage.setItem('storeID', result[index]['id']);
   const storeInfo = document.getElementById('store-info');
   const storeName = document.getElementById('info-name');
   const storeAddress = document.getElementById('info-address');

@@ -201,6 +201,11 @@ button {
     margin-top: 30px;
 }
 
+.section > p {
+    color: #555;
+    font-size: 12px;
+}
+
 .section-title {
     font-weight: bold;
     font-size: 16px;
@@ -255,7 +260,7 @@ button {
     align-items: center;
 }
 
-.store-name {
+.user-store-name {
     font-weight: bold;
 }
 

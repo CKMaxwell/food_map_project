@@ -3,12 +3,12 @@ fetch("./map.html")
   .then(res => res.text())
   .then(html => {
     document.getElementById('common-map').innerHTML = html;
-    // 初始化地圖，中心點設在台北車站，縮放等級 17
-    const map = L.map('map').setView([25.0478, 121.5170], 17);
-    // 加入 OpenStreetMap 圖層
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '地圖資料 © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> 貢獻者'
-      }).addTo(map);
+    // // 初始化地圖，中心點設在台北車站，縮放等級 17
+    // const map = L.map('map').setView([25.0478, 121.5170], 17);
+    // // 加入 OpenStreetMap 圖層
+    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //     attribution: '地圖資料 © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> 貢獻者'
+    //   }).addTo(map);
   });
 
 
@@ -175,6 +175,10 @@ async function getUserData() {
   }
 }
 
+function showFavoriteIcon() {
+  document.getElementById('add-icon').style.display = 'inline';
+};
+
 // 顯示：更新資料的div
 function showUpdateDiv() {
   document.getElementById('UpdateOverlay').style.display = 'flex';
@@ -227,7 +231,104 @@ function closeAlert() {
   document.getElementById('changeInfo-alert').classList.remove('show')
 }
 
-//// 載入頁面
-// 頁面載入時檢查是否已登入
-awaitAuth()
-getUserData();
+async function toggleFavorite() {
+  const token = localStorage.getItem('token');
+  const storeID = localStorage.getItem('storeID');
+  let figSrc = document.getElementById('add-icon').src.split('/').pop();
+  
+  if (figSrc === 'like_notSel.png') {
+    try {
+      const UrladdFavorite = new URL(baseFavoriteUrl);
+      UrladdFavorite.pathname += `${storeID}`;
+      const res = await fetch(UrladdFavorite.href, {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = await res.json();
+      document.getElementById('add-icon').src = './image/like_sel.png';
+      // return data;
+    } catch (err) {
+      // console.log(err);
+      // return err;
+    }
+  } else if (figSrc === 'like_sel.png') {
+    try {
+      const UrladdFavorite = new URL(baseFavoriteUrl);
+      UrladdFavorite.pathname += `${storeID}`;
+      const res = await fetch(UrladdFavorite.href, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = await res.json();
+      document.getElementById('add-icon').src = './image/like_notSel.png';
+      // return data;
+    } catch (err) {
+      // console.log(err);
+      // return err;
+    }
+  }
+}
+
+async function updateFavorite() {
+  const token = localStorage.getItem('token');
+  const favDiv = document.getElementById('favorite-card')
+  const today = new Date()
+  const year = today.getFullYear();      // 西元年（如 2025）
+  const month = today.getMonth() + 1;    // 月份（0~11）→ 所以要 +1
+  const day = today.getDate();           // 日（1~31）
+  try {
+    const UrladdFavorite = new URL(baseFavoriteUrl);
+    const res = await fetch(UrladdFavorite.href, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      }
+    });
+    const data = await res.json();
+    
+    favDiv.innerHTML = '<div class="section-title">喜愛店家</div>'
+    for (let favData of data) {
+      // console.log(favData['store']['name'])
+      favDiv.innerHTML += `
+        <div class="store-card">
+          <div class="store-top">
+            <div class="user-store-name">${favData['store']['name']}</div>
+            <div class="arrow">›</div>
+          </div>
+          <div class="store-meta">
+            <img src="./image/selection_icon.png">
+            <p>台北車站</p>
+            <img src="./image/love_plus.png">
+            <p>${year}/${month}/${day}</p>
+          </div>
+          <div class="store-desc">新增註解
+        </div>
+      `
+    }
+    
+    
+
+  } catch (err) {
+    // console.log(err);
+    // return err;
+  }
+  
+
+}
+
+function initUser() {
+  //// 載入頁面
+  // 頁面載入時檢查是否已登入
+  awaitAuth()
+  getUserData();
+  showFavoriteIcon();
+  updateFavorite();
+}
+window.addEventListener('load', initUser); // 確保 DOM 渲染完成後才執行

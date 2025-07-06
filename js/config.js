@@ -1,4 +1,8 @@
-const baseUrl = new URL('https://north11.onrender.com/api/users/');
-const baseStoreUrl = new URL('https://north11.onrender.com/api/stores/');
+// const baseUrl = new URL('https://north11.onrender.com/api/users/');
+// const baseStoreUrl = new URL('https://north11.onrender.com/api/stores/');
+const baseUrl = new URL('https://food-map-backend-24jf.onrender.com/api/users/');
+const baseStoreUrl = new URL('https://food-map-backend-24jf.onrender.com/api/stores/');
+const baseFavoriteUrl = new URL('https://food-map-backend-24jf.onrender.com/api/favorite/');
 // const baseUrl = new URL('http://localhost:8000/api/users/');
 // const baseStoreUrl = new URL('http://localhost:8000/api/stores/');
+// const baseFavoriteUrl = new URL('http://localhost:8000/api/favorite/');
