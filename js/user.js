@@ -253,6 +253,7 @@ async function toggleFavorite() {
       });
       const data = await res.json();
       document.getElementById('add-icon').src = './image/like_sel.png';
+      updateFavorite();
       // return data;
     } catch (err) {
       // console.log(err);
@@ -271,6 +272,7 @@ async function toggleFavorite() {
       });
       const data = await res.json();
       document.getElementById('add-icon').src = './image/like_notSel.png';
+      updateFavorite();
       // return data;
     } catch (err) {
       // console.log(err);
@@ -298,24 +300,29 @@ async function updateFavorite() {
     const data = await res.json();
     
     favDiv.innerHTML = '<div class="section-title">喜愛店家</div>'
-    for (let favData of data) {
-      // console.log(favData['store']['name'])
-      favDiv.innerHTML += `
-        <div class="store-card">
-          <div class="store-top">
-            <div class="user-store-name">${favData['store']['name']}</div>
-            <div class="arrow">›</div>
+    if (data.length == 0) {
+      favDiv.innerHTML += `<p>快把喜歡的店家加進來</p>`
+    } else if (data.length >= 0) {
+      for (let favData of data) {
+        // console.log(favData['store']['name'])
+        favDiv.innerHTML += `
+          <div class="store-card">
+            <div class="store-top">
+              <div class="user-store-name">${favData['store']['name']}</div>
+              <div class="arrow">›</div>
+            </div>
+            <div class="store-meta">
+              <img src="./image/selection_icon.png">
+              <p>台北車站</p>
+              <img src="./image/love_plus.png">
+              <p>${year}/${month}/${day}</p>
+            </div>
+            <div class="store-desc">新增註解
           </div>
-          <div class="store-meta">
-            <img src="./image/selection_icon.png">
-            <p>台北車站</p>
-            <img src="./image/love_plus.png">
-            <p>${year}/${month}/${day}</p>
-          </div>
-          <div class="store-desc">新增註解
-        </div>
-      `
-    }
+        `
+      }
+    };
+    
   } catch (err) {
     // console.log(err);
     // return err;
