@@ -12,6 +12,7 @@ fetch("./map.html")
     //     attribution: '地圖資料 © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> 貢獻者'
     //   }).addTo(map);
     init();
+    initUser();
   });
 
 
@@ -346,4 +347,4 @@ window.closeAlert = closeAlert
 window.toggleFavorite = toggleFavorite
 window.updateFavorite = updateFavorite
 
-window.addEventListener('load', initUser); // 確保 DOM 渲染完成後才執行
+// window.addEventListener('load', initUser); // 確保 DOM 渲染完成後才執行
