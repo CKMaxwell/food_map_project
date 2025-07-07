@@ -1,4 +1,4 @@
-async function updateInputStyle() {
+export async function updateInputStyle() {
   const elements = document.getElementsByClassName('search-result');
   // 用於在搜尋過程中，持續關閉店家資訊
   const storeInfo = document.getElementById('store-info');
@@ -34,7 +34,7 @@ async function updateInputStyle() {
 }
 
 // 顯示店家詳細圖卡
-async function showInfo(index) {
+export async function showInfo(index) {
   const mainInputBox = document.getElementById("main-search")
   let searchKeyWord = mainInputBox.value.trim();
   const result = await search(searchKeyWord)
@@ -62,12 +62,12 @@ async function showInfo(index) {
 }
 
 // 顯示店家詳細資料的index物件
-const state = {
+export const state = {
   storeShowIndex: 0
 };
 
 // 移動地圖位置&顯示icon
-function showMapInfoIcon(name, longitude, latitude) {
+export function showMapInfoIcon(name, longitude, latitude) {
   //建立自訂 icon
   var myIcon = L.icon({
     iconUrl: './image/map_loc.png', // 你也可以用自己的圖片
@@ -87,7 +87,7 @@ function showMapInfoIcon(name, longitude, latitude) {
 };
 
 // 搜尋函數
-async function search(keyword) {
+export async function search(keyword) {
   // 呼叫搜尋api
   const UrlSearch = new URL('search', baseStoreUrl);
   UrlSearch.searchParams.append('q', keyword);  // 加上 ?q=xxx
@@ -108,11 +108,11 @@ async function search(keyword) {
 
 
 // 顯示進階搜尋
-function showSelectSetting(item) {
-  settingBoxPrice = document.getElementById("select-price")
-  settingBoxTime = document.getElementById("select-time")
-  settingBoxDistance = document.getElementById("select-distance")
-  settingBoxType = document.getElementById("select-type")
+export function showSelectSetting(item) {
+  const settingBoxPrice = document.getElementById("select-price")
+  const settingBoxTime = document.getElementById("select-time")
+  const settingBoxDistance = document.getElementById("select-distance")
+  const settingBoxType = document.getElementById("select-type")
   // 用於在進階搜尋時，關閉店家資訊的顯示
   const storeInfo = document.getElementById('store-info');
   // 用於在進階搜尋時，關閉搜尋的顯示
@@ -243,7 +243,18 @@ export function init() {
     }).addTo(map);
 }
 
-let map;
-let marker;
-// window.addEventListener('load', init); 
+export let map;
+export let marker;
+// window.addEventListener('load', init);
 // 確保 DOM 渲染完成後才執行
+
+// 手動map.js的函數掛到全域
+window.map = map
+window.marker = marker
+window.state = state
+window.init = init
+window.showSelectSetting = showSelectSetting
+window.search = search
+window.showMapInfoIcon = showMapInfoIcon
+window.showInfo = showInfo
+window.updateInputStyle = updateInputStyle

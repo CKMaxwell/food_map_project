@@ -1,11 +1,11 @@
-// 導入共用map
 import { init } from './map.js';
 
+// 導入共用map
 fetch("./map.html")
   .then(res => res.text())
   .then(html => {
     document.getElementById('common-map').innerHTML = html;
-    // // 初始化地圖，中心點設在台北車站，縮放等級 17
+    // 初始化地圖，中心點設在台北車站，縮放等級 17
     // let map = L.map('map').setView([25.0478, 121.5170], 17);
     // // 加入 OpenStreetMap 圖層
     // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -56,7 +56,7 @@ function login() {
       console.log(data);
       if (data.status === 'success') {
         // button.textContent = data['data']['user']['name'];
-        token = data['data']['token'];
+        let token = data['data']['token'];
         document.getElementById('overlay').classList.remove('show');
         document.getElementById('login-box').classList.remove('show');
         document.getElementById("signup-box").classList.remove('show');
@@ -98,11 +98,6 @@ async function checkAuth() {
   console.log(data)
   // statusEl.textContent = res.ok ? '登入狀態：成功 ✅，使用者：' + data.user.username : '驗證失敗 ❌：' + data.message;
 }
-
-// function logOut() {
-//   document.getElementById("user-box-default").style.display = "block";
-//   document.getElementById("user-box-login").style.display = "none";
-// }
 
 // 登入頁面轉註冊頁面
 function toSignIn() {
@@ -236,3 +231,15 @@ document.querySelectorAll('.signUpTag').forEach(tag =>{
     tag.classList.add('selected');
   })
 })
+
+// 手動index.js的函數掛到全域
+window.showLogin = showLogin
+window.hideLogin = hideLogin
+window.login = login
+window.checkAuth = checkAuth
+window.toSignIn = toSignIn
+window.signUp = signUp
+window.closeAlert = closeAlert
+window.checkSignupWidth = checkSignupWidth
+window.showModal = showModal
+window.handleRouteChange = handleRouteChange

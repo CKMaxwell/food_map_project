@@ -1,6 +1,6 @@
-// 導入共用map
 import { init } from './map.js';
 
+// 導入共用map
 fetch("./map.html")
   .then(res => res.text())
   .then(html => {
@@ -160,19 +160,19 @@ async function getUserData() {
     document.getElementById('menu-dashboard').style.display = 'block'
   }
   // 更新使用者欄位數據
-  userName = document.getElementsByClassName('txt-name')
+  const userName = document.getElementsByClassName('txt-name')
   for (let i = 0; i < userName.length; i++) {
     userName[i].textContent = data['data']['user']['name']
   }
-  userEmail = document.getElementsByClassName('txt-email')
+  const userEmail = document.getElementsByClassName('txt-email')
   for (let i = 0; i < userEmail.length; i++) {
     userEmail[i].textContent = data['data']['user']['email']
   }
-  userPhone = document.getElementsByClassName('txt-phone')
+  const userPhone = document.getElementsByClassName('txt-phone')
   for (let i = 0; i < userPhone.length; i++) {
     userPhone[i].textContent = data['data']['user']['phonenumber']
   }
-  userLanguage = document.getElementsByClassName('txt-language')
+  const userLanguage = document.getElementsByClassName('txt-language')
   for (let i = 0; i < userLanguage.length; i++) {
     userLanguage[i].textContent = data['data']['user']['region']
   }
@@ -193,8 +193,8 @@ function hideUpdateDiv() {
 
 // 更新使用者資料
 async function updateUserData() {
-  newName = document.getElementById('update-username');
-  newPhone = document.getElementById('update-phone');
+  const newName = document.getElementById('update-username');
+  const newPhone = document.getElementById('update-phone');
   const selectedLanguage = document.querySelector('input[name="language"]:checked');
 
   const token = localStorage.getItem('token');
@@ -213,15 +213,15 @@ async function updateUserData() {
   })
   const data = await res.json();
   if (data.status === 'success') {
-    userName = document.getElementsByClassName('txt-name')
+    const userName = document.getElementsByClassName('txt-name')
     for (let i = 0; i < userName.length; i++) {
       userName[i].textContent = data['data']['user']['name']
     }
-    userPhone = document.getElementsByClassName('txt-phone')
+    const userPhone = document.getElementsByClassName('txt-phone')
     for (let i = 0; i < userPhone.length; i++) {
       userPhone[i].textContent = data['data']['user']['phonenumber']
     }
-    userLanguage = document.getElementsByClassName('txt-language')
+    const userLanguage = document.getElementsByClassName('txt-language')
     for (let i = 0; i < userLanguage.length; i++) {
       userLanguage[i].textContent = data['data']['user']['region']
     }
@@ -315,15 +315,10 @@ async function updateFavorite() {
         </div>
       `
     }
-    
-    
-
   } catch (err) {
     // console.log(err);
     // return err;
   }
-  
-
 }
 
 function initUser() {
@@ -334,4 +329,21 @@ function initUser() {
   showFavoriteIcon();
   updateFavorite();
 }
+
+// 手動user.js的函數掛到全域
+window.showModal = showModal
+window.logOut = logOut
+window.showSetting = showSetting
+window.showDashboard = showDashboard
+window.checkAuth = checkAuth
+window.awaitAuth = awaitAuth
+window.getUserData = getUserData
+window.showFavoriteIcon = showFavoriteIcon
+window.showUpdateDiv = showUpdateDiv
+window.hideUpdateDiv = hideUpdateDiv
+window.updateUserData = updateUserData
+window.closeAlert = closeAlert
+window.toggleFavorite = toggleFavorite
+window.updateFavorite = updateFavorite
+
 window.addEventListener('load', initUser); // 確保 DOM 渲染完成後才執行
