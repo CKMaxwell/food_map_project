@@ -45,12 +45,12 @@ export async function showInfo(index) {
   const storePhone = document.getElementById('info-phone');
   const storeEmail = document.getElementById('info-email');
   storeName.textContent = result[index]['name']
-  storeAddress.textContent = result[index]['location']['address']
+  storeAddress.textContent = result[index]['address']
   storePhone.textContent = result[index]['phone']
   storeEmail.textContent = result[index]['email']
   // console.log(result[index]['location']['lat'])
-  const longitude = result[index]['location']['lat']
-  const latitude = result[index]['location']['lng']
+  const longitude = result[index]['latitude']
+  const latitude = result[index]['longitude']
   // console.log(longitude, latitude)
   showMapInfoIcon(storeName, longitude, latitude)
   if (state.storeShowIndex !== index) {
