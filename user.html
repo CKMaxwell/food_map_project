@@ -103,95 +103,102 @@
                     <hr>
                 </div>
                 <div class="tab-content active" id="owner_tab1">
+                    <!-- 第一次註冊 -->
+                    <div id="without-store-data" class="show">
+                        <div id="first-store" class="show" onclick="showCreateStore()">新增你的商家資料</div>
+                    </div>
                     <!-- 統計資料 -->
-                    <div class="card">
-                        <img alt="store" src="./image/store_sample00.png">
-                        <div class="card-content">
-                            <div class="store-name-owner">店名</div>
-                            <div class="store-meta">種類</div>
-                            <div class="store-meta">📍 地址</div>
-                            <div class="store-meta">📞 電話</div>
-                            <div class="email">📧 電子郵件</div>
+                    <div id="with-store-data">
+                        <div class="card">
+                            <img alt="store" src="./image/store_sample00.png">
+                            <div class="card-content">
+                                <div class="store-name-owner">店名</div>
+                                <div class="store-meta">種類</div>
+                                <div class="store-meta">📍 地址</div>
+                                <div class="store-meta">📞 電話</div>
+                                <div class="email">📧 電子郵件</div>
+                            </div>
+                            <!-- <img class="avatar" alt="avatar"> -->
                         </div>
-                        <!-- <img class="avatar" alt="avatar"> -->
-                    </div>
 
-                    <div class="stats">
-                        <div>
-                            <div class="stat-value">102</div>
-                            <div class="stat-label">點擊次數</div>
+                        <div class="stats">
+                            <div>
+                                <div class="stat-value">0</div>
+                                <div class="stat-label">點擊次數</div>
+                            </div>
+                            <div>
+                                <div class="stat-value">0</div>
+                                <div class="stat-label">被列入喜愛</div>
+                            </div>
+                            <div>
+                                <div class="stat-value">0</div>
+                                <div class="stat-label">被列入觀察</div>
+                            </div>
+                            <div>
+                                <div class="stat-value">0 ▲</div>
+                                <div class="stat-label">客戶評價</div>
+                            </div>
                         </div>
-                        <div>
-                            <div class="stat-value">9</div>
-                            <div class="stat-label">被列入喜愛</div>
-                        </div>
-                        <div>
-                            <div class="stat-value">0</div>
-                            <div class="stat-label">被列入觀察</div>
-                        </div>
-                        <div>
-                            <div class="stat-value">4.8 ▲</div>
-                            <div class="stat-label">客戶評價</div>
-                        </div>
-                    </div>
-                    <!-- 基礎資料 -->
-                    <div class="section-title">基礎資料</div>
+                        
+                        <!-- 基礎資料 -->
+                        <div class="section-title">基礎資料</div>
 
-                    <div class="info-item">
-                        <div class="info-label">店家名稱</div>
-                        <div class="info-block">
-                            <div class="info-value shop-data">名稱</div>
-                            <div class="arrow" onclick="showStoreUpdateDiv()">›</div>
+                        <div class="info-item">
+                            <div class="info-label">店家名稱</div>
+                            <div class="info-block">
+                                <div class="info-value shop-data">名稱</div>
+                                <div class="arrow" onclick="showStoreUpdateDiv()">›</div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="info-item">
-                        <div class="info-label">店家地址</div>
-                        <div class="info-block">
-                            <div class="info-value shop-data">地址</div>
+                        <div class="info-item">
+                            <div class="info-label">店家地址</div>
+                            <div class="info-block">
+                                <div class="info-value shop-data">地址</div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="info-item">
-                        <div class="info-label">聯絡信箱</div>
-                        <div class="info-block">
-                            <div class="info-value shop-data">信箱</div>
-                            <div class="arrow" onclick="showStoreUpdateDiv()">›</div>
+                        <div class="info-item">
+                            <div class="info-label">聯絡信箱</div>
+                            <div class="info-block">
+                                <div class="info-value shop-data">信箱</div>
+                                <div class="arrow" onclick="showStoreUpdateDiv()">›</div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="info-item">
-                        <div class="info-label">聯絡電話</div>
-                        <div class="info-block">
-                            <div class="info-value shop-data">電話</div>
-                            <div class="arrow" onclick="showStoreUpdateDiv()">›</div>
+                        <div class="info-item">
+                            <div class="info-label">聯絡電話</div>
+                            <div class="info-block">
+                                <div class="info-value shop-data">電話</div>
+                                <div class="arrow" onclick="showStoreUpdateDiv()">›</div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="info-item">
-                        <div class="info-label">店家描述</div>
-                        <div class="info-block">
-                            <div class="info-value shop-data">關於店家</div>
-                            <div class="arrow" onclick="showStoreUpdateDiv()">›</div>
+                        <div class="info-item">
+                            <div class="info-label">店家描述</div>
+                            <div class="info-block">
+                                <div class="info-value shop-data">關於店家</div>
+                                <div class="arrow" onclick="showStoreUpdateDiv()">›</div>
+                            </div>
                         </div>
-                    </div>
-                    <!-- <div class="info-item">
-                        <div class="info-label">菜單（圖片）</div>
-                        <img class="avatar" alt="menu avatar">
-                    </div>
-
-                    <div class="info-item">
-                        <div class="info-label">菜單（連結）</div>
-                        <div class="info-value">點擊查看</div>
-                    </div> -->
-
-                    <!-- <div class="info-item">
-                        <div class="info-label">封面圖片</div>
-                        <div class="img-list">
-                            <img>
-                            <img>
+                        <!-- <div class="info-item">
+                            <div class="info-label">菜單（圖片）</div>
+                            <img class="avatar" alt="menu avatar">
                         </div>
-                    </div> -->
+
+                        <div class="info-item">
+                            <div class="info-label">菜單（連結）</div>
+                            <div class="info-value">點擊查看</div>
+                        </div> -->
+
+                        <!-- <div class="info-item">
+                            <div class="info-label">封面圖片</div>
+                            <div class="img-list">
+                                <img>
+                                <img>
+                            </div>
+                        </div> -->
+                    </div>
                 </div>
                 <!-- <div class="tab-content" id="owner_tab2">
                     店家設定 的內容
@@ -254,6 +261,30 @@
         </div>
     </div>
     
+    <div id="createStoreOverlay" class="overlay">
+        <div class="UpdateData">
+            <p onclick="hideStoreCreateDiv()" class="return">&times</p>
+            <h1>店家資訊</h1>
+            <p>店家名稱</p>
+            <input id="create-StoreUsername" type="text">
+            <p>店家地址</p>
+            <input id="create-StoreAddress" type="text">
+            <p>聯絡信箱</p>
+            <input id="create-StoreEmail" type="text">
+            <p>聯絡電話</p>
+            <input id="create-StorePhone" type="text">
+            <p>店家描述</p>
+            <input id="create-StoreDescribe" type="text">
+            <button onclick="createStoreData()">確定</button>
+        </div>
+    </div>
+    <!-- 完成修改店家資料通知 -->
+    <div id="createStoreInfo-alert" class="overlay">
+        <div class="alert-content">
+            <P>您已完成店家資料的資料創建</P>
+            <button onclick="closeCreateAlert()">關閉</button>
+        </div>
+    </div>
     <!-- 地圖 -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="js/config.js"></script>

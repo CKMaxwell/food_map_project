@@ -248,7 +248,41 @@ button {
     align-items: center;
 }
 
+#without-store-data{
+    display: none;
+}
+
+#without-store-data.show{
+    display: block;
+}
+
+#with-store-data{
+    display: none;
+}
+
+#with-store-data.show{
+    display: block;
+}
+
 /*設定-儲存店家 */
+#first-store {
+    display: none;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    color: #797070;
+    cursor: pointer;
+}
+
+#first-store:hover {
+    background-color: #e5e5e5;
+}
+
+#first-store.show{
+    display: block;
+}
+
 .store-card {
     padding: 12px 0;
     border-bottom: 1px solid #eee;

@@ -388,6 +388,8 @@ async function updateFavorite() {
 
 async function getStoreData() {
   const token = localStorage.getItem('token');
+  const withoutData = document.getElementById("without-store-data");
+  const withData = document.getElementById("with-store-data");
   const storeName = document.getElementsByClassName('store-name-owner')[0]
   const storeMetaType = document.getElementsByClassName('store-meta')[0]
   const storeMetaAddress = document.getElementsByClassName('store-meta')[1]
@@ -405,12 +407,35 @@ async function getStoreData() {
       }
     });
     const data = await res.json();
+    if (data['data'].length == 0) {
+      withoutData.classList.add('show')
+      withData.classList.remove('show')
+    } else if (data['data'].length != 0) {
+      withoutData.classList.remove('show')
+      withData.classList.add('show')
+    }
     const index = data['data'].findIndex(obj => obj.status === "active")
+    let description = data['data'][index]['description']
+    let address = data['data'][index]['location']['address']
+    let phone = data['data'][index]['phone']
+    let email = data['data'][index]['email']
+    if (description == null) {
+      description = ""
+    }
+    if (address == null) {
+      address = ""
+    }
+    if (phone == null) {
+      phone = ""
+    }
+    if (email == null) {
+      email = ""
+    }
     storeName.innerText = data['data'][index]['name']
-    storeMetaType.innerText = data['data'][index]['description']
-    storeMetaAddress.innerText = '📍' + data['data'][index]['location']['address']
-    storeMetaPhone.innerText = '📞' + data['data'][index]['phone']
-    storeEmail.innerText = '📧' + data['data'][index]['email']
+    storeMetaType.innerText = description
+    storeMetaAddress.innerText = '📍' + address
+    storeMetaPhone.innerText = '📞' + phone
+    storeEmail.innerText = '📧' + email
     shopData[0].innerText = data['data'][index]['name']
     shopData[1].innerText = data['data'][index]['location']['address']
     shopData[2].innerText = data['data'][index]['email']
@@ -420,7 +445,69 @@ async function getStoreData() {
     // console.log(err);
     // return err;
   }
-  
+}
+
+async function createStoreData() {
+  const token = localStorage.getItem('token');
+  const createStoreName = document.getElementById('create-StoreUsername').value;
+  const createStoreAddress = document.getElementById('create-StoreAddress').value;
+  const createStoreEmail = document.getElementById('create-StoreEmail').value;
+  const createStorePhone = document.getElementById('create-StorePhone').value;
+  const createStoreDescribe = document.getElementById('create-StoreDescribe').value;
+
+  let storeCreateData = {
+    "name": createStoreName,
+    "type":[
+        "restaurant"
+    ],
+    "location":{
+        "lat": 24,
+        "lng": 121,
+        "address": createStoreAddress
+    }
+  }
+  if (createStoreEmail != "") {
+    storeCreateData['emil'] = createStoreEmail
+  }
+  if (createStorePhone != "") {
+    storeCreateData['phone'] = createStorePhone
+  }
+  if (createStoreDescribe != "") {
+    storeCreateData['description'] = createStoreDescribe
+  }
+
+  try {
+    const UrlCreateStoreData = new URL('createstore', baseUrl);
+    const res = await fetch(UrlCreateStoreData.href, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      }, 
+      body: JSON.stringify(storeCreateData)
+    });
+    const data = await res.json();
+    console.log(data)
+    
+    document.getElementById('createStoreInfo-alert').classList.add('show')
+    hideStoreCreateDiv()
+    getStoreData()
+
+  } catch (err) {
+    // console.log(err);
+  }
+}
+
+function showCreateStore() {
+  document.getElementById('createStoreOverlay').style.display = 'flex';
+}
+
+function hideStoreCreateDiv() {
+  document.getElementById('createStoreOverlay').style.display = 'none';
+}
+
+function closeCreateAlert() {
+  document.getElementById('createStoreInfo-alert').classList.remove('show')
 }
 
 function initUser() {
@@ -454,5 +541,9 @@ window.showStoreUpdateDiv = showStoreUpdateDiv;
 window.hideStoreUpdateDiv = hideStoreUpdateDiv;
 window.closeStoreAlert = closeStoreAlert;
 window.updateStoreData = updateStoreData;
+window.showCreateStore = showCreateStore;
+window.hideStoreCreateDiv = hideStoreCreateDiv;
+window.createStoreData = createStoreData;
+window.closeCreateAlert = closeCreateAlert;
 
 // window.addEventListener('load', initUser); // 確保 DOM 渲染完成後才執行

@@ -1,5 +1,6 @@
 export async function updateInputStyle() {
-  const elements = document.getElementsByClassName('search-result');
+  const searchResult = document.getElementsByClassName('search-result')[0];
+  const searchResultElement = document.getElementsByClassName('search-result-item');
   // 用於在搜尋過程中，持續關閉店家資訊
   const storeInfo = document.getElementById('store-info');
   const mainInputBox = document.getElementById("main-search")
@@ -8,26 +9,35 @@ export async function updateInputStyle() {
     let searchKeyWord = mainInputBox.value.trim();
     // 只有在search api success時，才顯示結果
     try {
+      let elementsCount = 0;
       storeInfo.classList.remove('show')
       const result = await search(searchKeyWord)
       const eachResult = document.getElementsByClassName('store-name');
-      for (let i = 0; i <= 4; i++) {
+      for (let i = 0; (i <= result.length-1) & (i <= 4); i++) {
         eachResult[i].textContent = result[i].name;
       }
-      for (let el of elements) {
-        el.classList.add('show');
+      searchResult.classList.add('show');
+      for (const el of searchResultElement) {
+        if (elementsCount < result.length) {
+          el.classList.add('show');
+        } else {
+          el.classList.remove('show');
+        }
+        elementsCount += 1
       }
     } catch (err) {
       // 用於處理沒有搜尋到結果
       // console.log(err);
       mainInputBox.classList.remove('input-filled');
-      for (let el of elements) {
+      searchResult.classList.remove('show');
+      for (let el of searchResultElement) {
         el.classList.remove('show');
       }
     }
   } else {
     mainInputBox.classList.remove('input-filled');
-    for (let el of elements) {
+    searchResult.classList.remove('show');
+    for (let el of searchResultElement) {
       el.classList.remove('show');
     }
   }
