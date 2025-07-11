@@ -105,15 +105,15 @@
                 <div class="tab-content active" id="owner_tab1">
                     <!-- 統計資料 -->
                     <div class="card">
-                        <img alt="store">
+                        <img alt="store" src="./image/store_sample00.png">
                         <div class="card-content">
-                            <div class="store-name-owner">大馬路咖啡廳</div>
-                            <div class="store-meta">簡餐、西式、下午茶</div>
-                            <div class="store-meta">📍 大馬路 85 號</div>
-                            <div class="store-meta">📞 0800-000-001</div>
-                            <div class="email">📧 bigroad@gmail.com</div>
+                            <div class="store-name-owner">店名</div>
+                            <div class="store-meta">種類</div>
+                            <div class="store-meta">📍 地址</div>
+                            <div class="store-meta">📞 電話</div>
+                            <div class="email">📧 電子郵件</div>
                         </div>
-                        <img class="avatar" alt="avatar">
+                        <!-- <img class="avatar" alt="avatar"> -->
                     </div>
 
                     <div class="stats">
@@ -139,30 +139,43 @@
 
                     <div class="info-item">
                         <div class="info-label">店家名稱</div>
-                        <div class="info-value">大馬路咖啡廳</div>
+                        <div class="info-block">
+                            <div class="info-value shop-data">名稱</div>
+                            <div class="arrow" onclick="showStoreUpdateDiv()">›</div>
+                        </div>
                     </div>
 
                     <div class="info-item">
                         <div class="info-label">店家地址</div>
-                        <div class="info-value">大馬路 85 號</div>
+                        <div class="info-block">
+                            <div class="info-value shop-data">地址</div>
+                        </div>
                     </div>
 
                     <div class="info-item">
                         <div class="info-label">聯絡信箱</div>
-                        <div class="info-value">bigroad@gmail.com</div>
+                        <div class="info-block">
+                            <div class="info-value shop-data">信箱</div>
+                            <div class="arrow" onclick="showStoreUpdateDiv()">›</div>
+                        </div>
                     </div>
 
                     <div class="info-item">
                         <div class="info-label">聯絡電話</div>
-                        <div class="info-value">0800 000 001</div>
+                        <div class="info-block">
+                            <div class="info-value shop-data">電話</div>
+                            <div class="arrow" onclick="showStoreUpdateDiv()">›</div>
+                        </div>
                     </div>
 
                     <div class="info-item">
-                        <div class="info-label">店家標籤</div>
-                        <div class="info-value">簡餐、西式、下午茶</div>
+                        <div class="info-label">店家描述</div>
+                        <div class="info-block">
+                            <div class="info-value shop-data">關於店家</div>
+                            <div class="arrow" onclick="showStoreUpdateDiv()">›</div>
+                        </div>
                     </div>
-
-                    <div class="info-item">
+                    <!-- <div class="info-item">
                         <div class="info-label">菜單（圖片）</div>
                         <img class="avatar" alt="menu avatar">
                     </div>
@@ -170,15 +183,15 @@
                     <div class="info-item">
                         <div class="info-label">菜單（連結）</div>
                         <div class="info-value">點擊查看</div>
-                    </div>
+                    </div> -->
 
-                    <div class="info-item">
+                    <!-- <div class="info-item">
                         <div class="info-label">封面圖片</div>
                         <div class="img-list">
                             <img>
                             <img>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- <div class="tab-content" id="owner_tab2">
                     店家設定 的內容
@@ -187,7 +200,7 @@
         </div>
     </div>
     <div id="UpdateOverlay" class="overlay">
-        <div id="UpdateData">
+        <div class="UpdateData">
             <p onclick="hideUpdateDiv()" class="return">&times</p>
             <h1>更新資訊</h1>
             <p>用戶名稱</p>
@@ -215,6 +228,29 @@
         <div class="alert-content">
             <P>您已完成資料修改</P>
             <button onclick="closeAlert()">關閉</button>
+        </div>
+    </div>
+    
+    <div id="UpdateStoreOverlay" class="overlay">
+        <div class="UpdateData">
+            <p onclick="hideStoreUpdateDiv()" class="return">&times</p>
+            <h1>更新店家資訊</h1>
+            <p>店家名稱</p>
+            <input id="update-StoreUsername" type="text">
+            <p>聯絡信箱</p>
+            <input id="update-StoreEmail" type="text">
+            <p>聯絡電話</p>
+            <input id="update-StorePhone" type="text">
+            <p>店家描述</p>
+            <input id="update-StoreDescribe" type="text">
+            <button onclick="updateStoreData()">確定</button>
+        </div>
+    </div>
+    <!-- 完成修改店家資料通知 -->
+    <div id="changeStoreInfo-alert" class="overlay">
+        <div class="alert-content">
+            <P>您已完成店家資料的資料修改</P>
+            <button onclick="closeStoreAlert()">關閉</button>
         </div>
     </div>
     

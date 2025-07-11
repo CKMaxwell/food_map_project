@@ -390,7 +390,7 @@ button {
     display: flex;
 }
 
-#UpdateData {
+.UpdateData {
     display: block;
     background: #ffffff;
     padding: 30px;
@@ -399,7 +399,7 @@ button {
     width: 300px;
     /* text-align: center; */
 }
-#UpdateData button {
+.UpdateData button {
     display: block;
     width: 100%;
 }

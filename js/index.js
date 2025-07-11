@@ -177,6 +177,12 @@ function showModal(type) {
   if (type === 'signup') signupModal.classList.add('show');
 }
 
+// 關閉彈窗
+function closeModal() {
+  loginModal.classList.remove('show');
+  signupModal.classList.remove('show');
+}
+
 // 處理返回鍵 (chatGPT建議)
 window.addEventListener('popstate', () => {
     if (location.pathname === '/#/login') showModal('login');
@@ -242,4 +248,5 @@ window.signUp = signUp
 window.closeAlert = closeAlert
 window.checkSignupWidth = checkSignupWidth
 window.showModal = showModal
+window.closeModal = closeModal
 window.handleRouteChange = handleRouteChange

@@ -23,6 +23,13 @@ function showModal(type) {
   if (type === 'login') loginModal.classList.add('show');
   if (type === 'signup') signupModal.classList.add('show');
 }
+
+// 關閉彈窗
+function closeModal() {
+  loginModal?.classList.remove('show');
+  signupModal?.classList.remove('show');
+}
+
 // 處理返回鍵 (chatGPT建議)
   window.addEventListener('popstate', () => {
     if (location.pathname === '/login') showModal('login');
@@ -155,7 +162,7 @@ async function getUserData() {
   const data = await res.json();
   // 區分不同會員的顯示畫面
   let userRow = data['data']['user']['role']
-  console.log(userRow)
+  // console.log(userRow)
   if (userRow.toLowerCase() === 'store') {
     // document.getElementById('dashboard').style.display = 'none'
     document.getElementById('menu-dashboard').style.display = 'block'
@@ -233,6 +240,56 @@ async function updateUserData() {
 
 function closeAlert() {
   document.getElementById('changeInfo-alert').classList.remove('show')
+}
+
+// 顯示：更新資料的div
+function showStoreUpdateDiv() {
+  document.getElementById('UpdateStoreOverlay').style.display = 'flex';
+}
+
+function hideStoreUpdateDiv() {
+  document.getElementById('UpdateStoreOverlay').style.display = 'none';
+}
+
+async function updateStoreData() {
+  const newStoreName = document.getElementById('update-StoreUsername');
+  const newStoreEmail = document.getElementById('update-StoreEmail');
+  const newStorePhone = document.getElementById('update-StorePhone');
+  const newStoreDescribe = document.getElementById('update-StoreDescribe');
+  let storeData = {};
+  console.log(newStorePhone.value)
+  if (newStoreName.value.length != 0) {
+    storeData['name'] = newStoreName.value
+  }
+  if (newStoreEmail.value.length != 0) {
+    storeData['email'] = newStoreEmail.value
+  }
+  if (newStorePhone.value.length != 0) {
+    storeData['phone'] = newStorePhone.value
+  }
+  if (newStoreDescribe.value.length != 0) {
+    storeData['description'] = newStoreDescribe.value
+  }
+  
+  const token = localStorage.getItem('token');
+  const UrlgetStoreData = new URL('getstore', baseUrl);
+  const res = await fetch(UrlgetStoreData.href, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      }, 
+      body: JSON.stringify(storeData)
+  })
+  const data = await res.json();
+  getStoreData()
+  document.getElementById('changeStoreInfo-alert').classList.add('show')
+  hideStoreUpdateDiv()
+  
+}
+
+function closeStoreAlert() {
+  document.getElementById('changeStoreInfo-alert').classList.remove('show')
 }
 
 async function toggleFavorite() {
@@ -329,6 +386,43 @@ async function updateFavorite() {
   }
 }
 
+async function getStoreData() {
+  const token = localStorage.getItem('token');
+  const storeName = document.getElementsByClassName('store-name-owner')[0]
+  const storeMetaType = document.getElementsByClassName('store-meta')[0]
+  const storeMetaAddress = document.getElementsByClassName('store-meta')[1]
+  const storeMetaPhone = document.getElementsByClassName('store-meta')[2]
+  const storeEmail = document.getElementsByClassName('email')[0]
+  const shopData = document.getElementsByClassName('shop-data')
+  
+  try {
+    const UrlgetStoreData = new URL('getstore', baseUrl);
+    const res = await fetch(UrlgetStoreData.href, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      }
+    });
+    const data = await res.json();
+    const index = data['data'].findIndex(obj => obj.status === "active")
+    storeName.innerText = data['data'][index]['name']
+    storeMetaType.innerText = data['data'][index]['description']
+    storeMetaAddress.innerText = '📍' + data['data'][index]['location']['address']
+    storeMetaPhone.innerText = '📞' + data['data'][index]['phone']
+    storeEmail.innerText = '📧' + data['data'][index]['email']
+    shopData[0].innerText = data['data'][index]['name']
+    shopData[1].innerText = data['data'][index]['location']['address']
+    shopData[2].innerText = data['data'][index]['email']
+    shopData[3].innerText = data['data'][index]['phone']
+    shopData[4].innerText = data['data'][index]['description']
+  } catch (err) {
+    // console.log(err);
+    // return err;
+  }
+  
+}
+
 function initUser() {
   //// 載入頁面
   // 頁面載入時檢查是否已登入
@@ -336,10 +430,12 @@ function initUser() {
   getUserData();
   showFavoriteIcon();
   updateFavorite();
+  getStoreData();
 }
 
 // 手動user.js的函數掛到全域
 window.showModal = showModal
+window.closeModal = closeModal
 window.logOut = logOut
 window.showSetting = showSetting
 window.showDashboard = showDashboard
@@ -353,5 +449,10 @@ window.updateUserData = updateUserData
 window.closeAlert = closeAlert
 window.toggleFavorite = toggleFavorite
 window.updateFavorite = updateFavorite
+window.getStoreData = getStoreData;
+window.showStoreUpdateDiv = showStoreUpdateDiv;
+window.hideStoreUpdateDiv = hideStoreUpdateDiv;
+window.closeStoreAlert = closeStoreAlert;
+window.updateStoreData = updateStoreData;
 
 // window.addEventListener('load', initUser); // 確保 DOM 渲染完成後才執行
